@@ -2,6 +2,7 @@ package com.ty.dagger.daggerdemo.mvp.ui.activity.gank;
 
 import android.util.Log;
 
+import com.ty.dagger.daggerdemo.mvp.api.TestApi;
 import com.ty.dagger.daggerdemo.mvp.api.config.Constants;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallback;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallbackImpl;
@@ -10,6 +11,7 @@ import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BasePresenter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,6 +54,16 @@ public class GankPresenter<V extends GankContract.View> extends BasePresenter<V>
         baseGankRequest.setResponseCallback(gankLastDataResponseCallback);
         RequestNormalData(baseGankRequest);
 
+    }
+
+    @Override
+    public void getBanners() {
+        List<String> imgs = new ArrayList<>();
+        imgs.add(TestApi.img1);
+        imgs.add(TestApi.img2);
+        imgs.add(TestApi.img3);
+        imgs.add(TestApi.img4);
+        getMvpView().showBanners(imgs);
     }
 
 

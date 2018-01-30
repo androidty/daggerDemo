@@ -1,5 +1,6 @@
 package com.ty.dagger.daggerdemo.mvp.ui.base;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import com.ty.dagger.daggerdemo.mvp.di.component.ActivityComponent;
@@ -50,6 +51,22 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     public void showLoadingFail(String error) {
 
     }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof BaseActivity){
+            this.mBaseActivity = (BaseActivity) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mBaseActivity = null;
+        super.onDetach();
+    }
+
 
 
     public ActivityComponent getActivityComponent() {

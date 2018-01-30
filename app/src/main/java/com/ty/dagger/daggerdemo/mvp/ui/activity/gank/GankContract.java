@@ -16,12 +16,16 @@ public class GankContract {
     public interface Presenter<V extends GankContract.View> extends MvpPresenter<V> {
         void getGankData();
 
-//        void onAttach(V view);
+        void onAttach(V view);
 
-//        void onDetach();
+        void onDetach();
+
+        void getBanners();
     }
 
     public interface View extends MvpView{
         void showData(GankData<List<GankLastData>> gankLastDatas);
+
+        void showBanners(List<String> imgs);
     }
 }

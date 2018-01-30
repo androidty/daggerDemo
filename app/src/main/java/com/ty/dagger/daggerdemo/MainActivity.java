@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankActivity;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoActivity;
 
 public class MainActivity extends AppCompatActivity {
     FingerprintManagerCompat mFingerprintManager;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, GankActivity.class));
+                startActivity(new Intent(MainActivity.this, PhotoActivity.class));
 //                if(mFingerprintManager.hasEnrolledFingerprints()){
 //                    Toast.makeText(MainActivity.this, "有", Toast.LENGTH_SHORT).show();
 //                    mFingerprintManager.authenticate(null, 0, null, new MyCallBack(), null);
