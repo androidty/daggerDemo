@@ -26,12 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, PhotoActivity.class));
-//                if(mFingerprintManager.hasEnrolledFingerprints()){
-//                    Toast.makeText(MainActivity.this, "有", Toast.LENGTH_SHORT).show();
-//                    mFingerprintManager.authenticate(null, 0, null, new MyCallBack(), null);
-//                }else{
-//                    Toast.makeText(MainActivity.this, "没有", Toast.LENGTH_SHORT).show();
-//                }
+                Toast.makeText(MainActivity.this, "something will be done", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -41,15 +36,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     public class MyCallBack extends FingerprintManagerCompat.AuthenticationCallback {
         private static final String TAG = "MyCallBack";
 
         // 当出现错误的时候回调此函数，比如多次尝试都失败了的时候，errString是错误信息
         @Override
         public void onAuthenticationError(int errMsgId, CharSequence errString) {
-            Toast.makeText(MainActivity.this, ""+errString, Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "" + errString, Toast.LENGTH_SHORT).show();
         }
 
         // 当指纹验证失败的时候会回调此函数，失败之后允许多次尝试，失败次数过多会停止响应一段时间然后再停止sensor的工作
@@ -75,19 +68,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE,0,3,"tianyao");
-        menu.add(Menu.NONE,1,2,"TIANYAO");
-        menu.add(Menu.NONE,2,1,"zhongtuobang");
-        menu.add(Menu.NONE,3,4,"ZHONGTUOBANG");
+        menu.add(Menu.NONE, 0, 3, "tianyao");
+        menu.add(Menu.NONE, 1, 2, "TIANYAO");
+        menu.add(Menu.NONE, 2, 1, "zhongtuobang");
+        menu.add(Menu.NONE, 3, 4, "ZHONGTUOBANG");
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(this, ""+item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + item.getTitle().toString(), Toast.LENGTH_SHORT).show();
         return super.onOptionsItemSelected(item);
     }
 }
