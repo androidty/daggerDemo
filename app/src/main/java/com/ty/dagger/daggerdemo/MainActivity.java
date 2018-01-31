@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, PhotoActivity.class));
-                Toast.makeText(MainActivity.this, "something will be done", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "something will be!", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -36,36 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public class MyCallBack extends FingerprintManagerCompat.AuthenticationCallback {
-        private static final String TAG = "MyCallBack";
 
-        // 当出现错误的时候回调此函数，比如多次尝试都失败了的时候，errString是错误信息
-        @Override
-        public void onAuthenticationError(int errMsgId, CharSequence errString) {
-            Toast.makeText(MainActivity.this, "" + errString, Toast.LENGTH_SHORT).show();
-        }
-
-        // 当指纹验证失败的时候会回调此函数，失败之后允许多次尝试，失败次数过多会停止响应一段时间然后再停止sensor的工作
-        @Override
-        public void onAuthenticationFailed() {
-            Toast.makeText(MainActivity.this, "验证失败", Toast.LENGTH_SHORT).show();
-
-        }
-
-        @Override
-        public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-            Log.d(TAG, "onAuthenticationHelp: " + helpString);
-            Toast.makeText(MainActivity.this, helpString, Toast.LENGTH_SHORT).show();
-        }
-
-        // 当验证的指纹成功时会回调此函数，然后不再监听指纹sensor
-        @Override
-        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult
-                                                      result) {
-            Log.d(TAG, "onAuthenticationSucceeded: " + "验证成功");
-            Toast.makeText(MainActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
     @Override
