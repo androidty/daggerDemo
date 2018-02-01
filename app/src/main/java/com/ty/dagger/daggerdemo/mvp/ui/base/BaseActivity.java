@@ -16,6 +16,7 @@ import com.ty.dagger.daggerdemo.TyApplication;
 import com.ty.dagger.daggerdemo.mvp.di.component.ActivityComponent;
 import com.ty.dagger.daggerdemo.mvp.di.component.DaggerActivityComponent;
 import com.ty.dagger.daggerdemo.mvp.di.module.ActivityModule;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.splash.SplashActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpView;
 
@@ -32,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gank);
+        setContentView(getLayoutId());
         ButterKnife.bind(this);
         initTranslucentStatus();
         initActivityComponent();
@@ -66,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     private void initTranslucentStatus() {
         Window window = getWindow();
         //透明
-        if (!(this instanceof SplashActivity)) {
+        if ((this instanceof GankActivity)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View
