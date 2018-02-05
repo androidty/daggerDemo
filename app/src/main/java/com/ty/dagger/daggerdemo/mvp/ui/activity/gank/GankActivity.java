@@ -2,7 +2,6 @@ package com.ty.dagger.daggerdemo.mvp.ui.activity.gank;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
@@ -44,8 +43,8 @@ public class GankActivity extends BaseActivity implements GankContract.View {
     TabLayout mTablayout;
     @BindView(R.id.app_bar_layout)
     AppBarLayout mAppBarLayout;
-    @BindView(R.id.viewpager)
-    ViewPager mViewpager;
+//    @BindView(R.id.viewpager)
+//    ViewPager mViewpager;
 
 
 

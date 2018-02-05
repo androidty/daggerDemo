@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
+public class DanceNumWithCommaView extends android.support.v7.widget.AppCompatTextView {
     public static final String INTREGEX = "%1$01.0f";//不保留小数，整数
     public static final String FLOATREGEX2 = "%1$01.2f";//保留2位小数
     public static final String FLOATREGEX1 = "%1$01.1f";//保留1位小数
@@ -32,7 +32,7 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
     private String text;
     private String textPattern;
 
-    public DanceNumView(Context context, AttributeSet attrs) {
+    public DanceNumWithCommaView(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.DanceNumView);
         this.duration = ta.getInteger(R.styleable.DanceNumView_dnv_duration, 1500);
@@ -61,7 +61,6 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
         objectAnimator.setDuration((long) this.duration);
         objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         objectAnimator.start();
-
     }
 
     public float getFactor() {
@@ -71,7 +70,6 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
     public void setFactor(float factor) {
         String textNow = this.textPattern;
         this.factor = factor;
-        Log.d("fac", "setFactor: "+this.numberTemp[0]+"       "+this.numberTemp.length);
         for (int i = 0; i < this.numberTemp.length; ++i) {
             this.numberTemp[i] = ((Float) this.numbers.get(i)).floatValue() * factor;
             String s = "";
@@ -84,18 +82,12 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
             }
             if (numberTemp[i] < 10 && i != 0) {
                 s = "00" + s;
-            } else if (numberTemp[i] < 100 && i != 0) {
-                s = "0" + s;
+            }else if(numberTemp[i] < 100 && i != 0){
+                s="0"+s;
             }
             textNow = textNow.replaceFirst("@@@", s);
         }
-
-        if (!textNow.contains("\\,")) {
-            Log.d("setFactors", "setFactor: "+textNow);
-            this.setText(formatTosepara(Double.parseDouble(textNow)));
-        } else {
-            this.setText(textNow);
-        }
+        this.setText(textNow);
     }
 
     public int getDuration() {
@@ -124,5 +116,4 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
         }
         return df.format(data);
     }
-
 }

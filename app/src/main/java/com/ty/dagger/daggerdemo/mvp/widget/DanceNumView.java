@@ -1,4 +1,4 @@
-package com.ty.dagger.daggerdemo.mvp.widget.dancenumview;
+package com.ty.dagger.daggerdemo.mvp.widget;
 
 /**
  * Created by ty on 2018/2/1.
@@ -13,7 +13,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.ty.dagger.daggerdemo.R;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -61,7 +60,6 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
         objectAnimator.setDuration((long) this.duration);
         objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         objectAnimator.start();
-
     }
 
     public float getFactor() {
@@ -71,7 +69,6 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
     public void setFactor(float factor) {
         String textNow = this.textPattern;
         this.factor = factor;
-        Log.d("fac", "setFactor: "+this.numberTemp[0]+"       "+this.numberTemp.length);
         for (int i = 0; i < this.numberTemp.length; ++i) {
             this.numberTemp[i] = ((Float) this.numbers.get(i)).floatValue() * factor;
             String s = "";
@@ -84,18 +81,12 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
             }
             if (numberTemp[i] < 10 && i != 0) {
                 s = "00" + s;
-            } else if (numberTemp[i] < 100 && i != 0) {
-                s = "0" + s;
+            }else if(numberTemp[i] < 100 && i != 0){
+                s="0"+s;
             }
             textNow = textNow.replaceFirst("@@@", s);
         }
-
-        if (!textNow.contains("\\,")) {
-            Log.d("setFactors", "setFactor: "+textNow);
-            this.setText(formatTosepara(Double.parseDouble(textNow)));
-        } else {
-            this.setText(textNow);
-        }
+        this.setText(textNow);
     }
 
     public int getDuration() {
@@ -113,16 +104,4 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
     public void setFormat(String format) {
         this.format = format;
     }
-
-    //数字变成带逗号
-    public static String formatTosepara(Object data) {
-        DecimalFormat df;
-        if (data instanceof Double && !(data + "").split("\\.")[1].equals("0")) {
-            df = new DecimalFormat("#,###.0");
-        } else {
-            df = new DecimalFormat("#,###");
-        }
-        return df.format(data);
-    }
-
 }
