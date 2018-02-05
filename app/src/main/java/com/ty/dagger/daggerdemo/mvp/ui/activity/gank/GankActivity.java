@@ -1,14 +1,9 @@
 package com.ty.dagger.daggerdemo.mvp.ui.activity.gank;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ty.dagger.daggerdemo.R;
@@ -26,7 +21,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by ty on 2017/12/13.
@@ -39,25 +33,21 @@ public class GankActivity extends BaseActivity implements GankContract.View {
 
     @BindView(R.id.banner)
     Banner mBanner;
-    @BindView(R.id.head_layout)
-    LinearLayout mHeadLayout;
+//    @BindView(R.id.head_layout)
+//    LinearLayout mHeadLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.collapsingToolbarLayout)
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
+//    @BindView(R.id.collapsingToolbarLayout)
+//    CollapsingToolbarLayout mCollapsingToolbarLayout;
     @BindView(R.id.tablayout)
     TabLayout mTablayout;
     @BindView(R.id.app_bar_layout)
     AppBarLayout mAppBarLayout;
-    @BindView(R.id.viewpager)
-    ViewPager mViewpager;
+//    @BindView(R.id.viewpager)
+//    ViewPager mViewpager;
 
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-    }
+
 
     @Override
     protected void initInjector() {

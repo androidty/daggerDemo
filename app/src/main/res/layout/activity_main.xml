@@ -26,6 +26,24 @@
         app:lineColor="#000"
         app:totalNum="5"/>
 
+    <com.ty.dagger.daggerdemo.mvp.widget.dancenumview.DanceNumView
+        android:id="@+id/dnv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/dp_5"
+        android:singleLine="true"
+        android:text="6171978"
+        android:gravity="center"
+        android:textColor="@color/dnv"
+        android:textSize="@dimen/sp_26"
+        android:textStyle="bold"/>
+<EditText
+    android:id="@+id/et"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    app:layout_constraintTop_toBottomOf="@+id/atv"
+    />
 
     <Button
         android:id="@+id/button"
@@ -39,4 +57,15 @@
         app:layout_constraintTop_toBottomOf="@+id/pendulumView"
         />
 
+    <com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationTextView
+        android:id="@+id/atv"
+        app:layout_constraintTop_toBottomOf="@+id/dnv"
+        android:layout_width="match_parent"
+        android:text="111123456789.9"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_height="wrap_content"/>
 </android.support.constraint.ConstraintLayout>
