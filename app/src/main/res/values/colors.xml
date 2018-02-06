@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4aee99</color>
-    <color name="colorPrimaryDark">#4aee99</color>
+    <color name="colorPrimary">#b4e5f2</color>
+    <color name="colorPrimaryDark">#b4e5f2</color>
     <color name="colorAccent">#FF4081</color>
     <color name="material_white85">#d8FFFFFF</color>
     <color name="white">#ffffff</color>
     <color name="dnv">#FF5B37</color>
+    <color name="transparent">#00000000</color>
+    <color name="tabColor">#def1f6</color>
+    <color name="textColor_trans27_757575">#45757575</color>
 </resources>
