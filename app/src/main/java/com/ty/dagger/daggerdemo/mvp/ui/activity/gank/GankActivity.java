@@ -66,7 +66,7 @@ public class GankActivity extends BaseActivity implements GankContract.View {
                 Log.d("onOffsetChanged", "onOffsetChanged:      " + verticalOffset + "      " +
                         appBarLayout.getTotalScrollRange());
                 if (Math.abs((verticalOffset)) >= appBarLayout.getTotalScrollRange()) {
-                    StatusBarUtils.setStatusColor(GankActivity.this, getResources().getColor(R.color.tabColor));
+                    StatusBarUtils.setStatusColor(GankActivity.this, getResources().getColor(R.color.colorPrimary));
                 } else {
                    StatusBarUtils.setTranslucentStatusBar(GankActivity.this,mToolbar,0);
                 }
