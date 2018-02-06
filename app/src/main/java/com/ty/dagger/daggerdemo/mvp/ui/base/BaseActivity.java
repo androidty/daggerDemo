@@ -1,5 +1,6 @@
 package com.ty.dagger.daggerdemo.mvp.ui.base;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,14 +30,16 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity implements MvpView {
 
     private ActivityComponent mActivityComponent;
+    public Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
+        initActivityComponent();
+        Log.d("ddd", "onCreate: "+getLayoutId());
         setContentView(getLayoutId());
         ButterKnife.bind(this);
-        initTranslucentStatus();
-        initActivityComponent();
         initInjector();
         initView();
     }
@@ -58,7 +61,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((TyApplication) getApplication()).getApplicationComponent())
                 .build();
-
     }
 
     /**

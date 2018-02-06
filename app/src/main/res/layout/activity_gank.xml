@@ -11,7 +11,7 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        >
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
@@ -47,9 +47,9 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                app:title="main"
                 app:titleTextColor="#ffffff"
                 android:layout_width="match_parent"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
                 android:layout_height="48dp"
                 />
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -58,9 +58,36 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             style="@style/CustomTabLayout"
-            android:background="#ffffff"
+            android:background="#def1f6"
+            android:elevation="@dimen/dp_5"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
-            android:layout_height="48dp"></android.support.design.widget.TabLayout>
+            android:layout_height="48dp"
+            android:fillViewport="false"
+            app:tabIndicatorColor="#0835f8"
+            app:tabIndicatorHeight="2.0dp"
+            app:tabSelectedTextColor="#0835f8"
+            app:tabTextColor="#151515">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="首页" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="安卓" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ios" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="更多" />
+        </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -73,26 +100,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
-            <include layout="@layout/item_card"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
+            <include layout="@layout/item_home"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

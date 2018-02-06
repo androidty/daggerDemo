@@ -190,7 +190,7 @@ public class PendulumView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+//        super.onDraw(canvas);
 //        canvas.drawCircle(dotX,dotY,ballRadius,ballPaint);
 //        canvas.drawCircle(dotX, 2 * dotY, ballRadius, ballPaint);
 //        canvas.drawLine(dotX, dotY, dotX, 2 * dotY, ballPaint);
@@ -219,4 +219,6 @@ public class PendulumView extends View {
         }
         invalidate();
     }
+
+
 }

@@ -8,18 +8,24 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by ty on 2018/1/29.
  */
 
 public class PhotoActivity extends BaseActivity {
 
+    @BindView(R.id.photo_img)
+    PhotoView mPhotoImg;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
-        PhotoView photoView = findViewById(R.id.photo_img);
-        Glide.with(this).load("http://t2.hddhhn.com/uploads/tu/201709/9999/82001d5173.jpg").into(photoView);
+        ButterKnife.bind(this);
+        Glide.with(this).load("http://t2.hddhhn.com/uploads/tu/201709/9999/82001d5173.jpg").into(mPhotoImg);
     }
 
     @Override
@@ -34,7 +40,7 @@ public class PhotoActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.activity_photo;
     }
 
 
