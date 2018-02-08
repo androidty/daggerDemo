@@ -1,15 +1,9 @@
 package com.ty.dagger.daggerdemo.mvp.ui.base;
 
-import android.util.Log;
-
 import com.ty.dagger.daggerdemo.mvp.api.ApiService;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseGankRequest;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpPresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -62,13 +56,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
             @Override
             public void onNext(T response) {
-                if (response instanceof GankData) {
-                    GankData<List<GankLastData>> result = (GankData<List<GankLastData>>) response;
-                    Log.d(TAG, "onNext: " + result.getResults().get(0).getUrl());
                     baseRequest.getResponseCallback().onSuccess(response);
-                }
-
-
             }
         });
 

@@ -36,23 +36,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         StatusBarUtils.setStatusAlpha(this,0);
-        mAtv.setText("3520928429");
+//        mAtv.setStaticText("3520928429.908",2);
+        mAtv.setAnimationText("13214.43",3);
+
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, GankActivity.class));
-//                if(mEt.getText().toString().equals("")){
-//                    mDnv.setText("96000000");
-//                    mAtv.setText("96000000");
-//                }else{
-//                    mDnv.setText(mEt.getText().toString());
-//                    mAtv.setText(mEt.getText().toString());
-//                }
-//
-//                mDnv.setDuration(3000);
-//                mDnv.setFormat("%.0f");
-////                mDancingNumberView.dance();
-//                mAtv.startAnimations();
+
+
             }
         });
         mDnv = findViewById(R.id.dnv);

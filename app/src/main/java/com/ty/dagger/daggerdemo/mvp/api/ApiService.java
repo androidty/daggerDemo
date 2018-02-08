@@ -24,6 +24,10 @@ public interface ApiService<T> {
      http://gank.io/api/data/all/20/2
      */
 
-    @GET("data/{type}/10/{page}")
+
+    //all
+    @GET("data/{type}/20/{page}")
      Observable<GankData<List<GankLastData>>> getGankDataList(@Path("type")String type, @Path("page")int page);
+
+
 }

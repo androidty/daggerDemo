@@ -3,19 +3,31 @@ package com.ty.dagger.daggerdemo.mvp.ui.activity.gank;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.ty.dagger.daggerdemo.R;
+import com.ty.dagger.daggerdemo.mvp.ui.adapter.viewpageradapter.GankPagerAdapter;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.android.AndroidFragment;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeFragment;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.ios.IosFragment;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.other.OtherFragment;
 import com.ty.dagger.daggerdemo.mvp.widget.banner.GlideImageLoader;
 import com.ty.dagger.daggerdemo.mvp.widget.statuslayout.StatusBarUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,8 +45,8 @@ public class GankActivity extends BaseActivity implements GankContract.View {
 
     @BindView(R.id.banner)
     Banner mBanner;
-    //    @BindView(R.id.head_layout)
-//    LinearLayout mHeadLayout;
+        @BindView(R.id.head_layout)
+        LinearLayout mHeadLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.collapsingToolbarLayout)
@@ -43,9 +55,20 @@ public class GankActivity extends BaseActivity implements GankContract.View {
     TabLayout mTablayout;
     @BindView(R.id.app_bar_layout)
     AppBarLayout mAppBarLayout;
-//    @BindView(R.id.viewpager)
-//    ViewPager mViewpager;
+    @BindView(R.id.nestedScrollView)
+    NestedScrollView mNestedScrollView;
+    @BindView(R.id.viewpager)
+    ViewPager mViewpager;
 
+
+
+    private HomeFragment mHomeFragment;
+    private AndroidFragment mAndroidFragment;
+    private IosFragment mIosFragment;
+    private OtherFragment mOtherFragment;
+
+    private List<Fragment> mFragments = new ArrayList<>();
+    private GankPagerAdapter mGankPagerAdapter;
 
     @Override
     protected void initInjector() {
@@ -59,19 +82,40 @@ public class GankActivity extends BaseActivity implements GankContract.View {
 //        StatusBarUtils.setStatusColor(this,0,0);
         StatusBarUtils.setTranslucentStatusBar(GankActivity.this,mToolbar,0);
         mGankPresenter.getBanners();
+        mTablayout.setupWithViewPager(mViewpager);
 
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                Log.d("onOffsetChanged", "onOffsetChanged:      " + verticalOffset + "      " +
-                        appBarLayout.getTotalScrollRange());
-                if (Math.abs((verticalOffset)) >= appBarLayout.getTotalScrollRange()) {
-                    StatusBarUtils.setStatusColor(GankActivity.this, getResources().getColor(R.color.colorPrimary));
-                } else {
-                   StatusBarUtils.setTranslucentStatusBar(GankActivity.this,mToolbar,0);
-                }
-            }
-        });
+       initAppBar();
+
+       initFragments();
+
+
+
+       mGankPagerAdapter = new GankPagerAdapter(getSupportFragmentManager(),mFragments);
+       mViewpager.setAdapter(mGankPagerAdapter);
+       mViewpager.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View view, MotionEvent motionEvent) {
+//               view.getParent().requestDisallowInterceptTouchEvent(true);
+               return false;
+           }
+       });
+
+       mViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+           @Override
+           public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+               mViewpager.getParent().requestDisallowInterceptTouchEvent(true);
+           }
+
+           @Override
+           public void onPageSelected(int position) {
+
+           }
+
+           @Override
+           public void onPageScrollStateChanged(int state) {
+
+           }
+       });
     }
 
     @Override
@@ -112,6 +156,40 @@ public class GankActivity extends BaseActivity implements GankContract.View {
     public void showBanners(List<String> imgs) {
 
         initBanner(mBanner, imgs, 3000);
+    }
+
+    private void initAppBar(){
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                Log.d("onOffsetChanged", "onOffsetChanged:      " + verticalOffset + "      " +
+                        appBarLayout.getTotalScrollRange());
+                if (Math.abs((verticalOffset)) >= appBarLayout.getTotalScrollRange()) {
+                    StatusBarUtils.setStatusColor(GankActivity.this, getResources().getColor(R.color.colorPrimary));
+                } else {
+                    StatusBarUtils.setTranslucentStatusBar(GankActivity.this,mToolbar,0);
+                }
+            }
+        });
+    }
+
+    private void initFragments(){
+        if(mHomeFragment ==null){
+            mHomeFragment = new HomeFragment();
+            mFragments.add(mHomeFragment);
+        }
+        if(mAndroidFragment ==null){
+            mAndroidFragment = new AndroidFragment();
+            mFragments.add(mAndroidFragment);
+        }
+        if(mIosFragment ==null){
+            mIosFragment = new IosFragment();
+            mFragments.add(mIosFragment);
+        }
+        if(mOtherFragment ==null){
+            mOtherFragment = new OtherFragment();
+            mFragments.add(mOtherFragment);
+        }
     }
 
 

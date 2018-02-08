@@ -47,75 +47,43 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                app:titleTextColor="#ffffff"
                 android:layout_width="match_parent"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
                 android:layout_height="48dp"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
+                app:titleTextColor="#ffffff"
                 />
         </android.support.design.widget.CollapsingToolbarLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tablayout"
-            android:layout_width="match_parent"
             style="@style/CustomTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:background="#def1f6"
             android:elevation="@dimen/dp_5"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
-            android:layout_height="48dp"
             android:fillViewport="false"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
             app:tabIndicatorColor="#0835f8"
             app:tabIndicatorHeight="2.0dp"
             app:tabSelectedTextColor="#0835f8"
             app:tabTextColor="#151515">
 
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="首页" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="安卓" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="ios" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="更多" />
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">   <!--为滑动控件设置Behavior,这样上面的控件才能做出相应改变 -->
 
-        <LinearLayout
-            android:orientation="vertical"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-            <include layout="@layout/item_home"/>
-
-        </LinearLayout>
+            android:layout_height="match_parent"/>
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

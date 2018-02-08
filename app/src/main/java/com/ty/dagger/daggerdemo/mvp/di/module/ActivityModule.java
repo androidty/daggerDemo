@@ -3,6 +3,8 @@ package com.ty.dagger.daggerdemo.mvp.di.module;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankContract;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankPresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeContract;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomePresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,7 +26,15 @@ public class ActivityModule {
     }
 
     @Provides
-    public GankContract.Presenter<GankContract.View> provideGankPresenter(GankPresenter<GankContract.View> presenter) {
+    public GankContract.Presenter<GankContract.View> provideGankPresenter(GankPresenter<GankContract.View>
+                                                                                      presenter) {
+        return presenter;
+    }
+
+
+    @Provides
+    public HomeContract.Presenter<HomeContract.View> provideHomePresenter(HomePresenter<HomeContract.View>
+                                                                                  presenter) {
         return presenter;
     }
 
