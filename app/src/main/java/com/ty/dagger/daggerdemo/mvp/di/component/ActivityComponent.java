@@ -4,6 +4,7 @@ import com.ty.dagger.daggerdemo.mvp.di.PerActivity;
 import com.ty.dagger.daggerdemo.mvp.di.module.ActivityModule;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoActivity;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeFragment;
 
 import dagger.Component;
 
@@ -16,5 +17,7 @@ public interface ActivityComponent {
 
     void inject(GankActivity gankActivity);
     void inject(PhotoActivity photoActivity);
+
+    void inject(HomeFragment homeFragment);
 
 }

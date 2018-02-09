@@ -1,10 +1,18 @@
 package com.ty.dagger.daggerdemo.mvp.ui.base;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.ty.dagger.daggerdemo.mvp.di.component.ActivityComponent;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpView;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by ty on 2018/1/10.
@@ -12,7 +20,8 @@ import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpView;
 
 public abstract class BaseFragment extends Fragment implements MvpView {
 
-    private BaseActivity mBaseActivity;
+    public BaseActivity mBaseActivity;
+    private Unbinder mUnbinder;
 
 
 
@@ -21,6 +30,17 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     public abstract void initViews();
 
     public abstract void injectView();
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+            savedInstanceState) {
+        View view  = inflater.inflate(getLayoutId(),container,false);
+        injectView();
+        mUnbinder = ButterKnife.bind(this,view);
+        initViews();
+        return view;
+    }
 
     @Override
     public void showLoading() {
@@ -71,5 +91,12 @@ public abstract class BaseFragment extends Fragment implements MvpView {
 
     public ActivityComponent getActivityComponent() {
         return mBaseActivity.getActivityComponent();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 }

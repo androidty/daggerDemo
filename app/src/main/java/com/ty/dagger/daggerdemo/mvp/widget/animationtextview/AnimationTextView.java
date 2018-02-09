@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
@@ -14,6 +15,20 @@ import java.text.DecimalFormat;
  */
 
 public class AnimationTextView extends android.support.v7.widget.AppCompatTextView {
+
+    //默认保留整数位
+    private int keepFigures = 0;
+    private final String KEEP_INTEGER = "#,###";
+    private final String KEEP_ONE_FIGURE = "#,###.0";
+    private final String KEEP_TWO_FIGURE = "#,###.00";
+    private final String KEEP_THREE_FIGURE = "#,###.000";
+
+    private String KEEPFIGURE = KEEP_INTEGER;
+
+    private boolean openAnimation = false;
+    private String text;
+
+
     public AnimationTextView(Context context) {
         this(context, null);
     }
@@ -24,6 +39,8 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
 
     public AnimationTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        text = this.getText().toString();
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
     static class DoubleEValuetor implements TypeEvaluator<Double> {
@@ -36,12 +53,14 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
 
     double res;
 
-    public void startAnimations() {
-        String textNum = this.getText().toString();
 
-
-        res = Double.parseDouble(this.getText().toString());
-
+    public void setAnimationText(String text) {
+        if (!isNum(text)) {
+            this.setText("请设置纯数字文本");
+            return;
+        }
+        res = Double.parseDouble(text);
+        openAnimation = true;
         ValueAnimator animator = ValueAnimator
                 .ofObject(new DoubleEValuetor(), 0.1, res);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -50,24 +69,71 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
                 res = ((Double) animation.getAnimatedValue());
                 invalidate();
             }
+
         });
         animator.setDuration(3000);
         animator.start();
     }
 
+
+    public void setAnimationText(String text, int keepFigures) {
+        this.setKeepFigures(keepFigures);
+        setAnimationText(text);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        this.setText(formatTosepara(res));
+        if (openAnimation) {
+            this.setText(formatTosepara(res));
+        }
     }
 
-    public static String formatTosepara(Object data) {
+    public String formatTosepara(Object data) {
         DecimalFormat df;
-        if (data instanceof Double && !(data + "").split("\\.")[1].equals("0")) {
-            df = new DecimalFormat("#,###.0");
-        } else {
-            df = new DecimalFormat("#,###");
+        switch (getKeepFigures()) {
+            case 0:
+                KEEPFIGURE = KEEP_INTEGER;
+                break;
+            case 1:
+                KEEPFIGURE = KEEP_ONE_FIGURE;
+                break;
+            case 2:
+                KEEPFIGURE = KEEP_TWO_FIGURE;
+                break;
+            case 3:
+                KEEPFIGURE = KEEP_THREE_FIGURE;
+                break;
         }
+        df = new DecimalFormat(KEEPFIGURE);
         return df.format(data);
+    }
+
+    public void setStaticText(String text) {
+        if (!isNum(text)) {
+            this.setText("请设置纯数字文本");
+        } else {
+            this.setText(formatTosepara(Double.parseDouble(text)));
+        }
+    }
+
+    public void setStaticText(String text, int keepFigures) {
+        this.setKeepFigures(keepFigures);
+        this.setStaticText(text);
+    }
+
+
+    private void setKeepFigures(int keepFigures) {
+        this.keepFigures = keepFigures;
+    }
+
+    private int getKeepFigures() {
+        return keepFigures;
+    }
+
+
+    private boolean isNum(String str) {
+        String reg = "^[0-9]+(.[0-9]+)?$";
+        return str.matches(reg);
     }
 }

@@ -5,7 +5,12 @@ package com.ty.dagger.daggerdemo.mvp.api.config;
  */
 
 public interface Constants {
-    String ANDROID="Android";
+    String ALL = "all";
+    String ANDROID = "Android";
+    String FULI = "福利";
+    String IOS = "iOS";
+
+
     String GANKURL = "http://gank.io/api/";
 
 }

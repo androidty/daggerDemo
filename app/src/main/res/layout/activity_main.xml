@@ -62,7 +62,6 @@
         android:id="@+id/atv"
         app:layout_constraintTop_toBottomOf="@+id/dnv"
         android:layout_width="match_parent"
-        android:text="111123456789.9"
         android:gravity="center"
         android:padding="8dp"
         android:textSize="26sp"

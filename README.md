@@ -4,5 +4,29 @@
 ####Behavior
 [Behavior](http://blog.csdn.net/yanzhenjie1003/article/details/51938400)
 
-* 寝室间，无笑脸，唯我其中欢笑言，厌厌厌，可嫌可嫌；
-* 思当年，抹泪眼，独卧冰床难成眠，贱贱贱，可怜可怜。
+```java
+//判断是不是纯数字，不包含浮点数
+public boolean isNum(String str){
+     Pattern pattern = Pattern.compile("[0-9]{1,}");
+            Matcher matcher = pattern.matcher((CharSequence) str);
+    
+            boolean result = matcher.matches();
+    
+            if (result == true) {
+                System.out.println("该字符串是纯数字");
+                return true;
+            } else {
+                System.out.println("该字符串不是纯数字");
+                return false;
+            }
+}
+```
+
+```java
+//判断是不是纯数字，包含浮点数
+public boolean isNum(String str){
+    String reg = "^[0-9]+(.[0-9]+)?$";
+    return str.matches(reg);
+}
+```
+
