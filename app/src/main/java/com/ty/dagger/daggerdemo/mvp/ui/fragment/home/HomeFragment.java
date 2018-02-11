@@ -28,13 +28,15 @@ import butterknife.Unbinder;
  * Created by ty on 2018/2/6.
  */
 
-public class HomeFragment extends BaseFragment implements HomeContract.View,BaseQuickAdapter.RequestLoadMoreListener {
+public class HomeFragment extends BaseFragment implements HomeContract.View,
+        BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.home_recyclerview)
     RecyclerView mHomeRecyclerview;
     @BindView(R.id.home_swipeRefreshLayout)
     SwipeRefreshLayout mHomeSwipeRefreshLayout;
     Unbinder unbinder;
-    
+    int page = 1;
+
     private HomeAdapter mHomeAdapter;
     @Inject
     HomeContract.Presenter<HomeContract.View> mPresenter;
@@ -47,16 +49,17 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Base
     @Override
     public void initViews() {
         mPresenter.requestAllData();
-        
+
         initData();
         initRecycler();
     }
 
     private void initRecycler() {
-        mHomeAdapter = new HomeAdapter(R.layout.item_home,new ArrayList<GankLastData>());
+        mHomeAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<GankLastData>());
         mHomeRecyclerview.setLayoutManager(new LinearLayoutManager(mBaseActivity));
         mHomeRecyclerview.setAdapter(mHomeAdapter);
-        mHomeAdapter.setOnLoadMoreListener(this,mHomeRecyclerview);
+        mHomeAdapter.setOnLoadMoreListener(this, mHomeRecyclerview);
+        mHomeAdapter.disableLoadMoreIfNotFullPage();
     }
 
     private void initData() {
@@ -74,6 +77,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Base
     }
 
     @Override
+    public void returnMoreData(GankData<List<GankLastData>> gankLastDatas) {
+
+        mHomeAdapter.addData(gankLastDatas.getResults());
+        mHomeAdapter.loadMoreComplete();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
@@ -84,6 +94,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Base
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        page = 1;
         unbinder.unbind();
     }
 
@@ -93,8 +104,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Base
         super.onDestroy();
     }
 
+
     @Override
     public void onLoadMoreRequested() {
-
+        page++;//进行page+1
+        mPresenter.getMoreData(page);
     }
 }
+
+

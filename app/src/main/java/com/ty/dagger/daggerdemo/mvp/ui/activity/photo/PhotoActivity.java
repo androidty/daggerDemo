@@ -2,14 +2,17 @@ package com.ty.dagger.daggerdemo.mvp.ui.activity.photo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
+import com.ty.dagger.daggerdemo.mvp.widget.statuslayout.StatusBarUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by ty on 2018/1/29.
@@ -17,6 +20,8 @@ import butterknife.ButterKnife;
 
 public class PhotoActivity extends BaseActivity {
 
+
+    String imgUrl;
     @BindView(R.id.photo_img)
     PhotoView mPhotoImg;
 
@@ -24,8 +29,11 @@ public class PhotoActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
+        StatusBarUtils.setTranslucentStatusBar(PhotoActivity.this,mPhotoImg,0);
         ButterKnife.bind(this);
-        Glide.with(this).load("http://t2.hddhhn.com/uploads/tu/201709/9999/82001d5173.jpg").into(mPhotoImg);
+        getIntentData();
+//        imgUrl="http://t2.hddhhn.com/uploads/tu/201709/9999/b0d28560cf.jpg";
+        Glide.with(this).load(imgUrl).centerCrop().into(mPhotoImg);
     }
 
     @Override
@@ -43,5 +51,13 @@ public class PhotoActivity extends BaseActivity {
         return R.layout.activity_photo;
     }
 
+    public void getIntentData() {
+        imgUrl = getIntent().getStringExtra("imgUrl");
+    }
 
+
+    @OnClick(R.id.photo_img)
+    public void onViewClicked() {
+        ActivityCompat.finishAfterTransition(PhotoActivity.this);
+    }
 }

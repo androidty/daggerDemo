@@ -16,18 +16,27 @@ import rx.Observable;
 public interface ApiService<T> {
     /**
      * http://gank.io/api/data/Android/10/1
-
-     http://gank.io/api/data/福利/10/1
-
-     http://gank.io/api/data/iOS/20/2
-
-     http://gank.io/api/data/all/20/2
+     * <p>
+     * http://gank.io/api/data/福利/10/1
+     * <p>
+     * http://gank.io/api/data/iOS/20/2
+     * <p>
+     * http://gank.io/api/data/all/20/2
+     * <p>
+     * http://gank.io/api/random/data/福利/20
      */
 
 
     //all
-    @GET("data/{type}/20/{page}")
-     Observable<GankData<List<GankLastData>>> getGankDataList(@Path("type")String type, @Path("page")int page);
+    @GET("data/{type}/10/{page}")
+    Observable<GankData<List<GankLastData>>> getGankDataList(@Path("type") String type, @Path("page") int
+            page);
+
+
+
+    @GET("random/data/{type}/{count}")
+    Observable<GankData<List<GankLastData>>> getRandomDataList(@Path("type") String type, @Path("count") int
+            count);
 
 
 }

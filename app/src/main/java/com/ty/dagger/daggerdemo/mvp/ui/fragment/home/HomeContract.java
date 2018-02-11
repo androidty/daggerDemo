@@ -14,9 +14,13 @@ import java.util.List;
 public class HomeContract {
     public interface View extends MvpView {
         void returnAllData(GankData<List<GankLastData>> gankLastDatas);
+
+        void returnMoreData(GankData<List<GankLastData>> gankLastDatas);
     }
 
-    public interface Presenter<V extends HomeContract.View> extends MvpPresenter<V>{
+    public interface Presenter<V extends HomeContract.View> extends MvpPresenter<V> {
         void requestAllData();
+
+        void getMoreData(int page);
     }
 }

@@ -22,7 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiServiceModule {
 
 
-
     @Provides
     @Singleton
     protected OkHttpClient provideOkHttpClient() {
