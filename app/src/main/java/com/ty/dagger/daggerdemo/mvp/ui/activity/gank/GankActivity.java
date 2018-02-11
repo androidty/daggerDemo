@@ -162,8 +162,6 @@ public class GankActivity extends BaseActivity implements GankContract.View {
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                Log.d("onOffsetChanged", "onOffsetChanged:      " + verticalOffset + "      " +
-                        appBarLayout.getTotalScrollRange());
                 if (Math.abs((verticalOffset)) >= appBarLayout.getTotalScrollRange()) {
                     StatusBarUtils.setStatusColor(GankActivity.this, getResources().getColor(R.color.colorPrimary));
                 } else {

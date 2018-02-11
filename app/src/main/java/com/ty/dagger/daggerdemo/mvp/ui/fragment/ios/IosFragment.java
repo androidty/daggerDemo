@@ -32,4 +32,7 @@ public class IosFragment extends BaseFragment implements HomeContract.View{
     public void returnAllData(GankData<List<GankLastData>> gankLastDatas) {
 
     }
+    @Override
+    public void returnMoreData(GankData<List<GankLastData>> gankLastDatas) {
+    }
 }

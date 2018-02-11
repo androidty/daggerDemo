@@ -1,5 +1,7 @@
 package com.ty.dagger.daggerdemo.mvp.ui.fragment.home;
 
+import android.util.Log;
+
 import com.ty.dagger.daggerdemo.mvp.api.config.Constants;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallback;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallbackImpl;
@@ -29,7 +31,7 @@ public class HomePresenter<V extends HomeContract.View> extends BasePresenter<V>
     public void requestAllData() {
         BaseGankRequest<GankData<List<GankLastData>>> baseGankRequest = new BaseGankRequest<GankData<List<GankLastData>>>();
         HashMap<String, String> stringHashMap = new HashMap<>();
-        stringHashMap.put("type", Constants.FULI);
+        stringHashMap.put("type", Constants.ALL);
         HashMap<String, Integer> integerHashMap = new HashMap<>();
         integerHashMap.put("page", 1);
 
@@ -44,6 +46,31 @@ public class HomePresenter<V extends HomeContract.View> extends BasePresenter<V>
         baseGankRequest.setHashMap(stringHashMap);
         baseGankRequest.setMethod("GET");
         baseGankRequest.setResponseCallback(gankLastDataResponseCallback);
-        RequestNormalData(baseGankRequest);
+        RequestCombiData(baseGankRequest);
     }
+
+    @Override
+    public void getMoreData(int page) {
+        BaseGankRequest<GankData<List<GankLastData>>> baseGankRequest = new BaseGankRequest<GankData<List<GankLastData>>>();
+        HashMap<String, String> stringHashMap = new HashMap<>();
+        stringHashMap.put("type", Constants.ALL);
+        HashMap<String, Integer> integerHashMap = new HashMap<>();
+        integerHashMap.put("page", page);
+
+        ResponseCallback<GankData<List<GankLastData>>> gankLastDataResponseCallback = new ResponseCallbackImpl<GankData<List<GankLastData>>>() {
+            @Override
+            public void onSuccess(GankData<List<GankLastData>> response) {
+                Log.d("onNextaa", "onSuccess: ");
+                getMvpView().returnMoreData(response);
+            }
+        };
+
+        baseGankRequest.setIntegerHashMap(integerHashMap);
+        baseGankRequest.setHashMap(stringHashMap);
+        baseGankRequest.setMethod("GET");
+        baseGankRequest.setResponseCallback(gankLastDataResponseCallback);
+        RequestCombiData(baseGankRequest);
+    }
+
+
 }

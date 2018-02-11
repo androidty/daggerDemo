@@ -1,15 +1,20 @@
 package com.ty.dagger.daggerdemo.mvp.ui.adapter.recyclerviewadapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.annotation.RequiresApi;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.ty.dagger.daggerdemo.R;
-import com.ty.dagger.daggerdemo.mvp.api.config.Constants;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoActivity;
 
 import java.util.List;
 
@@ -23,19 +28,26 @@ public class HomeAdapter extends BaseQuickAdapter<GankLastData, BaseViewHolder> 
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, GankLastData item) {
-//        Log.d("myname", "convert: " + item.getDesc());
+    protected void convert(BaseViewHolder helper, final GankLastData item) {
         helper.setText(R.id.item_author_tv, item.getWho()).setText(R.id.item_type_tv, item.getType()).setText
                 (R.id.item_desc_tv, item.getDesc()).setText(R.id.item_time_tv, item.getCreatedAt());
-        if (item.getType().equals(Constants.FULI)) {
-            Log.d("myname", "convert: "+item.getUrl());
-            Glide.with(mContext).load(item.getUrl()).into((ImageView) helper
-                    .getView(R.id.item_img_iv));
-        }
-        if(helper.getAdapterPosition()==3){
-            helper.setText(R.id.item_collect_tv,"已收藏");
-        }else{
-            helper.setText(R.id.item_collect_tv,"收藏");
+        Glide.with(mContext).load(item.getSource()).asBitmap().centerCrop().into((ImageView) helper
+                .getView(R.id.item_img_iv));
+        helper.getView(R.id.item_img_iv).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), PhotoActivity.class);
+                intent.putExtra("imgUrl",item.getSource());
+                view.getContext().startActivity(intent,
+                        ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view,
+                                "sharedView").toBundle());
+            }
+        });
+        if (helper.getAdapterPosition() == 3) {
+            helper.setText(R.id.item_collect_tv, "已收藏");
+        } else {
+            helper.setText(R.id.item_collect_tv, "收藏");
         }
     }
 }
