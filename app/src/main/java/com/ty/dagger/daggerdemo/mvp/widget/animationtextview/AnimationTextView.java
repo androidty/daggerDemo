@@ -40,7 +40,6 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
     public AnimationTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         text = this.getText().toString();
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
     static class DoubleEValuetor implements TypeEvaluator<Double> {
