@@ -1,5 +1,7 @@
 package com.ty.dagger.daggerdemo.mvp.ui.adapter.recyclerviewadapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -23,6 +25,8 @@ import java.util.List;
 
 public class HomeAdapter extends BaseQuickAdapter<GankLastData, BaseViewHolder> {
 
+
+//    http://ohp3wewhw.bkt.clouddn.com/imgurls.json
 
 
     String url1="http://t2.hddhhn.com/uploads/tu/201709/9999/21f0e3c5fa.jpg";
@@ -73,13 +77,13 @@ public class HomeAdapter extends BaseQuickAdapter<GankLastData, BaseViewHolder> 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), PhotoActivity.class);
-                intent.putExtra("type",1);
-//                intent.putExtra("imgUrl",item.getSource());
-                intent.putStringArrayListExtra("imgUrls",urlList);
-                view.getContext().startActivity(intent);
-//                view.getContext().startActivity(intent,
-//                        ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view,
-//                                "sharedView").toBundle());
+                intent.putExtra("type",0);
+                intent.putExtra("imgUrl",item.getSource());
+//                intent.putStringArrayListExtra("imgUrls",urlList);
+//                view.getContext().startActivity(intent);
+                view.getContext().startActivity(intent,
+                        ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view,
+                                "sharedView").toBundle());
             }
         });
         if (helper.getAdapterPosition() == 3) {
