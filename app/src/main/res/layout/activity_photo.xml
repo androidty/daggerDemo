@@ -3,11 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <com.github.chrisbanes.photoview.PhotoView
-        android:layout_centerInParent="true"
         android:id="@+id/photo_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         android:transitionName="sharedView"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/photo_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:transitionName="sharedView"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/photo_num_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:background="@color/transparent"
+        android:text="3/20"
+        android:textSize="18sp"/>
+
 
 </RelativeLayout>
