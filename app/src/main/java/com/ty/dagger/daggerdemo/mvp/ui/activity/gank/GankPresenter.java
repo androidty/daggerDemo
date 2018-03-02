@@ -15,7 +15,6 @@ import javax.inject.Inject;
 public class GankPresenter<V extends GankContract.View> extends BasePresenter<V> implements
         GankContract.Presenter<V> {
     private static final String TAG = "tytytyty";
-
     @Inject
     public GankPresenter() {
 

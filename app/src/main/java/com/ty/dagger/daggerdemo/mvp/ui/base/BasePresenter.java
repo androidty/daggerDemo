@@ -109,9 +109,9 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
                 baseRequest.getResponseCallback().onSuccess((T) o);
             }
         });
-
-
     }
+
+
 
 
     public V getMvpView() {

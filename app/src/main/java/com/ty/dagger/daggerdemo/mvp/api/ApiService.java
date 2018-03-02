@@ -2,6 +2,7 @@ package com.ty.dagger.daggerdemo.mvp.api;
 
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
+import com.ty.dagger.daggerdemo.mvp.entity.ImgUrls;
 
 import java.util.List;
 
@@ -38,5 +39,7 @@ public interface ApiService<T> {
     Observable<GankData<List<GankLastData>>> getRandomDataList(@Path("type") String type, @Path("count") int
             count);
 
+    @GET
+    Observable<ImgUrls> getImgUrls(String url);
 
 }
