@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
@@ -22,6 +21,7 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
     private final String KEEP_ONE_FIGURE = "#,###.0";
     private final String KEEP_TWO_FIGURE = "#,###.00";
     private final String KEEP_THREE_FIGURE = "#,###.000";
+    private final String KEEP_FOUR_FIGURE = "#,###.0000";
 
     private String KEEPFIGURE = KEEP_INTEGER;
 
@@ -102,6 +102,9 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
                 break;
             case 3:
                 KEEPFIGURE = KEEP_THREE_FIGURE;
+                break;
+            case 4:
+                KEEPFIGURE = KEEP_FOUR_FIGURE;
                 break;
         }
         df = new DecimalFormat(KEEPFIGURE);
