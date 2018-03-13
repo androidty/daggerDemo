@@ -55,4 +55,23 @@
         </attr>
         <attr name="msv_animateViewChanges" format="boolean"/>
     </declare-styleable>
+
+
+    <style name="style_title_text">
+        <item name="android:layout_marginBottom">@dimen/dp_25</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/dp_15</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+
+    <style name="stype_scrollview">
+        <item name="android:scrollbars">none</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fillViewport">true</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
 </resources>

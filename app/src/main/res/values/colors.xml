@@ -9,4 +9,8 @@
     <color name="transparent">#00000000</color>
     <color name="tabColor">#def1f6</color>
     <color name="textColor_trans27_757575">#45757575</color>
+    <color name="textColor_757575">#757575</color>
+    <color name="cardViewbg_F8F8F9">#F8F8F9</color>
+    <color name="ringBackColor">#d3d5d4</color>
+    <color name="ringProgressColor">#40efe6</color>
 </resources>
