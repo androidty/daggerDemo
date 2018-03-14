@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ty.dagger.daggerdemo.mvp.widget.MyOverScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bbsj_sl"
+    style="@style/stype_scrollview"
+    android:background="@color/cardViewbg_F8F8F9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:background="#524F66">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/wo"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@mipmap/evening">
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/bbsj_title_tv"
+                android:layout_marginTop="24dp"
+                style="@style/style_title_text"
+                android:text="步步生金"/>
+
+            <ImageView
+                android:src="@mipmap/step_night"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/step_bgIv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150"
+                android:scaleType="centerCrop"/>
+        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+                <com.ty.dagger.daggerdemo.mvp.widget.RingProgressView
+                    android:id="@+id/ringProgressView"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ringProgressView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="42dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:id="@+id/imageView"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:text="步步生金"
+                    android:textColor="@color/ringProgressColor"
+                    android:textSize="@dimen/sp_18"/>
+                <ImageView
+                    android:id="@+id/step_peopleIv"
+                    android:layout_width="@dimen/dp_25"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginBottom="52dp"
+                    android:src="@mipmap/step_people_two"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            app:cardCornerRadius="@dimen/dp_10"
+            app:cardElevation="@dimen/dp_5"
+            app:cardPreventCornerOverlap="false">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/bbsj_rlv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"/>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</com.ty.dagger.daggerdemo.mvp.widget.MyOverScrollView>
