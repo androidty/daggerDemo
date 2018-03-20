@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pendulumView"
         />
 
-    <com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationTextView
+    <com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationNumView
         android:id="@+id/atv"
         app:layout_constraintTop_toBottomOf="@+id/dnv"
         android:layout_width="match_parent"

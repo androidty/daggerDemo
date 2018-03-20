@@ -3,9 +3,9 @@ package com.ty.dagger.daggerdemo.mvp.widget.animationtextview;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.animation.LinearInterpolator;
 
 import java.text.DecimalFormat;
 
@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
  * Created by ty on 2018/2/2.
  */
 
-public class AnimationTextView extends android.support.v7.widget.AppCompatTextView {
+public class AnimationNumView extends android.support.v7.widget.AppCompatTextView {
 
     //默认保留整数位
     private int keepFigures = 0;
@@ -26,27 +26,26 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
     private String KEEPFIGURE = KEEP_INTEGER;
 
     private boolean openAnimation = false;
-    private String text;
 
 
-    public AnimationTextView(Context context) {
+    public AnimationNumView(Context context) {
         this(context, null);
     }
 
-    public AnimationTextView(Context context, @Nullable AttributeSet attrs) {
+    public AnimationNumView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AnimationTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public AnimationNumView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        text = this.getText().toString();
     }
+
 
     static class DoubleEValuetor implements TypeEvaluator<Double> {
         @Override
-        public Double evaluate(float v, Double aDouble, Double t1) {
-            double x = v * t1;
-            return x;
+        public Double evaluate(float fraction, Double startValue, Double endValue) {
+            double startDouble = startValue.doubleValue();
+            return startDouble + fraction * (endValue.doubleValue() - startDouble);
         }
     }
 
@@ -66,11 +65,11 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 res = ((Double) animation.getAnimatedValue());
-                invalidate();
+                setText(formatTosepara(res));
             }
 
         });
-        animator.setDuration(3000);
+        animator.setDuration(5000);
         animator.start();
     }
 
@@ -80,13 +79,22 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
         setAnimationText(text);
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        if (openAnimation) {
-            this.setText(formatTosepara(res));
-        }
+    int numInt = 0;
+
+    public void setIntegerAnimationNum(int num) {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, num);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                numInt = (int) animation.getAnimatedValue();
+                setText(formatTosepara(numInt));
+            }
+        });
+        valueAnimator.setDuration(1000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.start();
     }
+
 
     public String formatTosepara(Object data) {
         DecimalFormat df;
@@ -133,9 +141,10 @@ public class AnimationTextView extends android.support.v7.widget.AppCompatTextVi
         return keepFigures;
     }
 
-
     private boolean isNum(String str) {
         String reg = "^[0-9]+(.[0-9]+)?$";
         return str.matches(reg);
     }
+
+
 }
