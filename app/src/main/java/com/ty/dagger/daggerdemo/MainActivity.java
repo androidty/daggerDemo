@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankActivity;
-import com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationTextView;
+import com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationNumView;
 import com.ty.dagger.daggerdemo.mvp.widget.dancenumview.DanceNumView;
 import com.ty.dagger.daggerdemo.mvp.widget.statuslayout.StatusBarUtils;
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button)
     Button mButton;
     @BindView(R.id.atv)
-    AnimationTextView mAtv;
+    AnimationNumView mAtv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
