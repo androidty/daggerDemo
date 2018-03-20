@@ -45,8 +45,8 @@ public class GankActivity extends BaseActivity implements GankContract.View {
 
     @BindView(R.id.banner)
     Banner mBanner;
-        @BindView(R.id.head_layout)
-        LinearLayout mHeadLayout;
+    @BindView(R.id.head_layout)
+    LinearLayout mHeadLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.collapsingToolbarLayout)
@@ -59,7 +59,6 @@ public class GankActivity extends BaseActivity implements GankContract.View {
     NestedScrollView mNestedScrollView;
     @BindView(R.id.viewpager)
     ViewPager mViewpager;
-
 
 
     private HomeFragment mHomeFragment;
@@ -80,42 +79,41 @@ public class GankActivity extends BaseActivity implements GankContract.View {
     @Override
     public void initView() {
 //        StatusBarUtils.setStatusColor(this,0,0);
-        StatusBarUtils.setTranslucentStatusBar(GankActivity.this,mToolbar,0);
+        StatusBarUtils.setTranslucentStatusBar(GankActivity.this, mToolbar, 0);
         mGankPresenter.getBanners();
         mTablayout.setupWithViewPager(mViewpager);
 
-       initAppBar();
+        initAppBar();
 
-       initFragments();
+        initFragments();
 
 
-
-       mGankPagerAdapter = new GankPagerAdapter(getSupportFragmentManager(),mFragments);
-       mViewpager.setAdapter(mGankPagerAdapter);
-       mViewpager.setOnTouchListener(new View.OnTouchListener() {
-           @Override
-           public boolean onTouch(View view, MotionEvent motionEvent) {
+        mGankPagerAdapter = new GankPagerAdapter(getSupportFragmentManager(), mFragments);
+        mViewpager.setAdapter(mGankPagerAdapter);
+        mViewpager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
 //               view.getParent().requestDisallowInterceptTouchEvent(true);
-               return false;
-           }
-       });
+                return false;
+            }
+        });
 
-       mViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-           @Override
-           public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-               mViewpager.getParent().requestDisallowInterceptTouchEvent(true);
-           }
+        mViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                mViewpager.getParent().requestDisallowInterceptTouchEvent(true);
+            }
 
-           @Override
-           public void onPageSelected(int position) {
+            @Override
+            public void onPageSelected(int position) {
 
-           }
+            }
 
-           @Override
-           public void onPageScrollStateChanged(int state) {
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
-           }
-       });
+            }
+        });
     }
 
     @Override
@@ -158,33 +156,34 @@ public class GankActivity extends BaseActivity implements GankContract.View {
         initBanner(mBanner, imgs, 3000);
     }
 
-    private void initAppBar(){
+    private void initAppBar() {
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (Math.abs((verticalOffset)) >= appBarLayout.getTotalScrollRange()) {
-                    StatusBarUtils.setStatusColor(GankActivity.this, getResources().getColor(R.color.colorPrimary));
+                    StatusBarUtils.setStatusColor(GankActivity.this, getResources().getColor(R.color
+                            .colorPrimary));
                 } else {
-                    StatusBarUtils.setTranslucentStatusBar(GankActivity.this,mToolbar,0);
+                    StatusBarUtils.setTranslucentStatusBar(GankActivity.this, mToolbar, 0);
                 }
             }
         });
     }
 
-    private void initFragments(){
-        if(mHomeFragment ==null){
+    private void initFragments() {
+        if (mHomeFragment == null) {
             mHomeFragment = new HomeFragment();
             mFragments.add(mHomeFragment);
         }
-        if(mAndroidFragment ==null){
+        if (mAndroidFragment == null) {
             mAndroidFragment = new AndroidFragment();
             mFragments.add(mAndroidFragment);
         }
-        if(mIosFragment ==null){
+        if (mIosFragment == null) {
             mIosFragment = new IosFragment();
             mFragments.add(mIosFragment);
         }
-        if(mOtherFragment ==null){
+        if (mOtherFragment == null) {
             mOtherFragment = new OtherFragment();
             mFragments.add(mOtherFragment);
         }
