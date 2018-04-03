@@ -61,12 +61,9 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
             public void onError(Throwable e) {
                 baseRequest.getResponseCallback().onError(e);
             }
-
             @Override
             public void onNext(T response) {
                 GankData gankData = (GankData) response;
-
-
                 baseRequest.getResponseCallback().onSuccess(response);
             }
         });
@@ -79,7 +76,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         Observable observable2 = mApiService.getGankDataList(Constants.FULI, baseRequest.getIntegerHashMap
                 ().get("page")).subscribeOn
                 (Schedulers.io
-                ());
+                        ());
         Observable.zip(observable1, observable2, new Func2<T, T, T>() {
             @Override
             public T call(T t, T t2) {
@@ -110,8 +107,6 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
             }
         });
     }
-
-
 
 
     public V getMvpView() {
