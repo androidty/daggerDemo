@@ -8,6 +8,7 @@ import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallbackImpl;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseGankRequest;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
+import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BasePresenter;
 
 import java.util.HashMap;
@@ -70,6 +71,24 @@ public class HomePresenter<V extends HomeContract.View> extends BasePresenter<V>
         baseGankRequest.setMethod("GET");
         baseGankRequest.setResponseCallback(gankLastDataResponseCallback);
         RequestCombiData(baseGankRequest);
+    }
+
+    @Override
+    public void requestImg() {
+        BaseGankRequest<GankData<List<Img>>> baseGankRequest = new BaseGankRequest<GankData<List<Img>>>();
+
+        ResponseCallback<GankData<List<Img>>> gankLastDataResponseCallback = new ResponseCallbackImpl<GankData<List<Img>>>() {
+            @Override
+            public void onSuccess(GankData<List<Img>> response) {
+                Log.d("returnImg", "onSuccess: ");
+                getMvpView().returnImg(response);
+            }
+        };
+
+
+        baseGankRequest.setMethod("GET");
+        baseGankRequest.setResponseCallback(gankLastDataResponseCallback);
+        RequestImg(baseGankRequest);
     }
 
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
+import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.ui.adapter.recyclerviewadapter.HomeAdapter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseFragment;
 
@@ -74,6 +76,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
     @Override
     public void returnAllData(GankData<List<GankLastData>> gankLastDatas) {
         mHomeAdapter.setNewData(gankLastDatas.getResults());
+        mPresenter.requestImg();
     }
 
     @Override
@@ -81,6 +84,17 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
 
         mHomeAdapter.addData(gankLastDatas.getResults());
         mHomeAdapter.loadMoreComplete();
+    }
+
+    @Override
+    public void returnImg(GankData<List<Img>> imgs) {
+        Log.d("returnImg", "returnImg: "+imgs.getResults().size());
+        List<String> img = new ArrayList<>();
+        for (int i = 0; i <imgs.getResults().size(); i++) {
+            img.add(imgs.getResults().get(i).getUrl());
+        }
+        mHomeAdapter.setImgs(img);
+
     }
 
     @Override
