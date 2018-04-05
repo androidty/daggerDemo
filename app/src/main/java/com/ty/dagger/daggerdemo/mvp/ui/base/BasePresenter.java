@@ -30,6 +30,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
     @Inject
     public ApiService mApiService;
 
+
     @Inject
     public BasePresenter() {
     }
@@ -47,6 +48,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
 
     public <T> void RequestNormalData(final BaseGankRequest<T> baseRequest) {
+
         mApiService.getGankDataList(baseRequest.getHashMap().get("type").toString(), baseRequest
                 .getIntegerHashMap().get("page"))
                 .subscribeOn(Schedulers.io())
@@ -63,13 +65,13 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
             }
             @Override
             public void onNext(T response) {
-                GankData gankData = (GankData) response;
                 baseRequest.getResponseCallback().onSuccess(response);
             }
         });
     }
 
     public <T> void RequestCombiData(final BaseGankRequest<T> baseRequest) {
+
         Observable observable1 = mApiService.getGankDataList(baseRequest.getHashMap().get("type").toString
                 (), baseRequest
                 .getIntegerHashMap().get("page")).subscribeOn(Schedulers.io());
@@ -106,6 +108,27 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
                 baseRequest.getResponseCallback().onSuccess((T) o);
             }
         });
+    }
+
+
+    public <T> void RequestImg(final BaseGankRequest<T> baseRequest){
+        mApiService.getImgs().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<T>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("img_url", "onError: "+e);
+                    }
+
+                    @Override
+                    public void onNext(T o) {
+                        Log.d("img_url", "onNext: "+o.toString());
+                        baseRequest.getResponseCallback().onSuccess((T) o);
+                    }
+                });
     }
 
 

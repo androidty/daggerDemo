@@ -2,6 +2,7 @@ package com.ty.dagger.daggerdemo.mvp.ui.fragment.home;
 
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
+import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpPresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpView;
 
@@ -16,11 +17,14 @@ public class HomeContract {
         void returnAllData(GankData<List<GankLastData>> gankLastDatas);
 
         void returnMoreData(GankData<List<GankLastData>> gankLastDatas);
+        void returnImg(GankData<List<Img>> imgs);
     }
 
     public interface Presenter<V extends HomeContract.View> extends MvpPresenter<V> {
         void requestAllData();
 
         void getMoreData(int page);
+
+        void requestImg();
     }
 }

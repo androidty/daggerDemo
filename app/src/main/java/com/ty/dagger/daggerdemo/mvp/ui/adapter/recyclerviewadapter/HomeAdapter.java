@@ -1,7 +1,5 @@
 package com.ty.dagger.daggerdemo.mvp.ui.adapter.recyclerviewadapter;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -55,7 +53,7 @@ public class HomeAdapter extends BaseQuickAdapter<GankLastData, BaseViewHolder> 
             url11,url12,url13,url14,url15,
             url16,url17,url18,url19,url20,
     };
-    ArrayList<String> urlList = new ArrayList<>();
+    List<String> urlList = new ArrayList<>();
 
 
     public HomeAdapter(int layoutResId, @Nullable List<GankLastData> data) {
@@ -78,12 +76,12 @@ public class HomeAdapter extends BaseQuickAdapter<GankLastData, BaseViewHolder> 
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), PhotoActivity.class);
                 intent.putExtra("type",0);
-                intent.putExtra("imgUrl",item.getSource());
-//                intent.putStringArrayListExtra("imgUrls",urlList);
-//                view.getContext().startActivity(intent);
-                view.getContext().startActivity(intent,
-                        ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view,
-                                "sharedView").toBundle());
+//                intent.putExtra("imgUrl",item.getSource());
+                intent.putStringArrayListExtra("imgUrls", (ArrayList<String>) urlList);
+                view.getContext().startActivity(intent);
+//                view.getContext().startActivity(intent,
+//                        ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view,
+//                                "sharedView").toBundle());
             }
         });
         if (helper.getAdapterPosition() == 3) {
@@ -91,5 +89,10 @@ public class HomeAdapter extends BaseQuickAdapter<GankLastData, BaseViewHolder> 
         } else {
             helper.setText(R.id.item_collect_tv, "收藏");
         }
+    }
+
+
+    public void setImgs(List<String> img) {
+        urlList = img;
     }
 }

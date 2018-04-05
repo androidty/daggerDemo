@@ -11,10 +11,11 @@ public interface Constants {
     String IOS = "iOS";
 
 
-    String GANKURL = "http://gank.io/api/";
-
-
-
+    String BASEURL = "baseurl";
+    String GANKURL = "http://gank.io/";
+    String GANK = "gank";
+    String IMGURL = "http://120.79.29.61:8080/";
+    String IMG = "img";
 
 
 }

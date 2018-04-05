@@ -1,17 +1,17 @@
 package com.ty.dagger.daggerdemo.mvp.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by ty on 2018/4/3.
  */
 
-public class Img {
-    /**
-     * id : 1
-     * url : http://t2.hddhhn.com/uploads/tu/201709/9999/21f0e3c5fa.jpg
-     */
-
+public class Img implements Serializable{
     private int id;
     private String url;
+
+    public Img() {
+    }
 
     public int getId() {
         return id;

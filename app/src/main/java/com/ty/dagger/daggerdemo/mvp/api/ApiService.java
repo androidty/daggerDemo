@@ -2,11 +2,12 @@ package com.ty.dagger.daggerdemo.mvp.api;
 
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
-import com.ty.dagger.daggerdemo.mvp.entity.ImgUrls;
+import com.ty.dagger.daggerdemo.mvp.entity.Img;
 
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import rx.Observable;
 
@@ -29,17 +30,19 @@ public interface ApiService<T> {
 
 
     //all
-    @GET("data/{type}/10/{page}")
+    @Headers("baseurl:gank")
+    @GET("api/data/{type}/10/{page}")
     Observable<GankData<List<GankLastData>>> getGankDataList(@Path("type") String type, @Path("page") int
             page);
 
 
-
-    @GET("random/data/{type}/{count}")
+    @Headers("baseurl:gank")
+    @GET("api/random/data/{type}/{count}")
     Observable<GankData<List<GankLastData>>> getRandomDataList(@Path("type") String type, @Path("count") int
             count);
 
-    @GET
-    Observable<ImgUrls> getImgUrls(String url);
+    @Headers("baseurl:img")
+    @GET("demodev/image/findAll")
+    Observable<GankData<List<Img>>> getImgs();
 
 }
