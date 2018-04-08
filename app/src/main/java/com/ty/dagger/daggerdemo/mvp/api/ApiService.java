@@ -41,8 +41,11 @@ public interface ApiService<T> {
     Observable<GankData<List<GankLastData>>> getRandomDataList(@Path("type") String type, @Path("count") int
             count);
 
+
     @Headers("baseurl:img")
     @GET("demodev/image/findAll")
     Observable<GankData<List<Img>>> getImgs();
+
+
 
 }

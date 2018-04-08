@@ -40,6 +40,8 @@ public class ApiServiceModule {
                 Request request = chain.request();
                 Request.Builder builder = request.newBuilder();
                 List<String> headers = request.headers(Constants.BASEURL);
+                //这里可以添加公共请求头
+
                 if (headers != null && headers.size() > 0) {
                     builder.removeHeader(Constants.BASEURL);
                     HttpUrl oldHttpUrl = request.url();
