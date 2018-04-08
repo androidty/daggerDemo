@@ -76,11 +76,9 @@ public class HomePresenter<V extends HomeContract.View> extends BasePresenter<V>
     @Override
     public void requestImg() {
         BaseGankRequest<GankData<List<Img>>> baseGankRequest = new BaseGankRequest<GankData<List<Img>>>();
-
         ResponseCallback<GankData<List<Img>>> gankLastDataResponseCallback = new ResponseCallbackImpl<GankData<List<Img>>>() {
             @Override
             public void onSuccess(GankData<List<Img>> response) {
-                Log.d("returnImg", "onSuccess: ");
                 getMvpView().returnImg(response);
             }
         };

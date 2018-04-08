@@ -28,6 +28,8 @@ import butterknife.Unbinder;
 
 /**
  * Created by ty on 2018/2/6.
+ * xshell免费下载链接
+ * http://www.netsarang.com/download/free_license.html
  */
 
 public class HomeFragment extends BaseFragment implements HomeContract.View,
