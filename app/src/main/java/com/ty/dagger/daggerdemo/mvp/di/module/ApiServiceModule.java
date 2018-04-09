@@ -18,7 +18,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -32,8 +32,10 @@ public class ApiServiceModule {
     @Singleton
     protected OkHttpClient provideOkHttpClient() {
         return new OkHttpClient.Builder().connectTimeout(5000, TimeUnit.MILLISECONDS).readTimeout
-                (5000, TimeUnit.MILLISECONDS).addInterceptor(new HttpLoggingInterceptor().setLevel
-                (HttpLoggingInterceptor.Level.BODY)).addInterceptor(new Interceptor() {
+                (5000, TimeUnit.MILLISECONDS)
+                .addInterceptor(new HttpLoggingInterceptor().setLevel
+                (HttpLoggingInterceptor.Level.BODY))
+                .addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 //获取request
@@ -66,8 +68,8 @@ public class ApiServiceModule {
 
     @Provides
     @Singleton
-    protected RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
-        return RxJavaCallAdapterFactory.create();
+    protected RxJava2CallAdapterFactory provideRxJavaCallAdapterFactory() {
+        return RxJava2CallAdapterFactory.create();
     }
 
     @Provides
@@ -78,10 +80,10 @@ public class ApiServiceModule {
 
     @Provides
     @Singleton
-    protected Retrofit provideRetrofit(RxJavaCallAdapterFactory rxJavaCallAdapterFactory,
+    protected Retrofit provideRetrofit(RxJava2CallAdapterFactory rxJava2CallAdapterFactory,
                                        GsonConverterFactory gsonConverterFactory, OkHttpClient
                                                okHttpClient) {
-        return new Retrofit.Builder().addCallAdapterFactory(rxJavaCallAdapterFactory).addConverterFactory
+        return new Retrofit.Builder().addCallAdapterFactory(rxJava2CallAdapterFactory).addConverterFactory
                 (gsonConverterFactory).baseUrl(Constants.GANKURL).client(okHttpClient).build();
     }
 

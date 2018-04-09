@@ -1,7 +1,5 @@
 package com.ty.dagger.daggerdemo.mvp.ui.base;
 
-import android.util.Log;
-
 import com.ty.dagger.daggerdemo.mvp.api.ApiService;
 import com.ty.dagger.daggerdemo.mvp.api.config.Constants;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseGankRequest;
@@ -14,11 +12,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by ty on 2017/12/11.
@@ -52,21 +52,31 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         mApiService.getGankDataList(baseRequest.getHashMap().get("type").toString(), baseRequest
                 .getIntegerHashMap().get("page"))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<T>
-                () {
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer() {
             @Override
-            public void onCompleted() {
+            public void onSubscribe(Disposable d) {
 
+            }
+
+            @Override
+            public void onNext(Object o) {
+                baseRequest.getResponseCallback().onSuccess((T) o);
             }
 
             @Override
             public void onError(Throwable e) {
-                baseRequest.getResponseCallback().onError(e);
+
             }
+
             @Override
-            public void onNext(T response) {
-                baseRequest.getResponseCallback().onSuccess(response);
+            public void onComplete() {
+
             }
+
+
+
+
+
         });
     }
 
@@ -77,11 +87,11 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
                 .getIntegerHashMap().get("page")).subscribeOn(Schedulers.io());
         Observable observable2 = mApiService.getGankDataList(Constants.FULI, baseRequest.getIntegerHashMap
                 ().get("page")).subscribeOn
-                (Schedulers.io
-                        ());
-        Observable.zip(observable1, observable2, new Func2<T, T, T>() {
+                (Schedulers.io());
+        Observable.zip(observable1, observable2, new BiFunction<T, T, T>() {
+
             @Override
-            public T call(T t, T t2) {
+            public T apply(T t, T t2) throws Exception {
                 GankData gankData1 = (GankData) t;
                 GankData gankData2 = (GankData) t2;
                 List<GankLastData> gankLastDataList2 = (List<GankLastData>) gankData2.getResults();
@@ -91,10 +101,16 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
                 }
                 return (T) gankData1;
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber() {
-            @Override
-            public void onCompleted() {
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer() {
 
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                baseRequest.getResponseCallback().onSuccess((T) o);
             }
 
             @Override
@@ -103,32 +119,38 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
             }
 
             @Override
-            public void onNext(Object o) {
-                Log.d("onNextaa", "onNext");
-                baseRequest.getResponseCallback().onSuccess((T) o);
+            public void onComplete() {
+
             }
         });
     }
 
 
-    public <T> void RequestImg(final BaseGankRequest<T> baseRequest){
+    public <T> void RequestImg(final BaseGankRequest<T> baseRequest) {
         mApiService.getImgs().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<T>() {
+                .subscribe(new Observer() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+                        baseRequest.getResponseCallback().onSuccess((T) o);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("img_url", "onError: "+e);
+
                     }
 
                     @Override
-                    public void onNext(T o) {
-                        Log.d("img_url", "onNext: "+o.toString());
-                        baseRequest.getResponseCallback().onSuccess((T) o);
+                    public void onComplete() {
+
                     }
                 });
+
+
     }
 
 
