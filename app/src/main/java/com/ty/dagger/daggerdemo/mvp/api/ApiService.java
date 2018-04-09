@@ -6,10 +6,11 @@ import com.ty.dagger.daggerdemo.mvp.entity.Img;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
-import rx.Observable;
+
 
 /**
  * Created by ty on 2017/12/11.

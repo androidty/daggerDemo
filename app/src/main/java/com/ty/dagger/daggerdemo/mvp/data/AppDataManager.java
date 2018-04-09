@@ -1,7 +1,7 @@
 package com.ty.dagger.daggerdemo.mvp.data;
 
+import io.reactivex.Observable;
 import okhttp3.internal.http.HttpMethod;
-import rx.Observable;
 
 /**
  * Created by ty on 2018/1/4.
