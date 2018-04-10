@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.ty.dagger.daggerdemo.R;
+import com.ty.dagger.daggerdemo.mvp.utils.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,6 @@ public class PhotoViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        Log.d("instantiateItem", "destroyItem:    " + position);
         container.removeView((View) object);
     }
 
@@ -54,17 +53,13 @@ public class PhotoViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(final ViewGroup container, final int position) {
         View view = mInflater.inflate(R.layout.item_photoview, null);
         PhotoView photoView = view.findViewById(R.id.item_photoview);
-        Log.d("instantiateItem", "instantiateItem: load " + position + "   count " + container
-                .getChildCount());
         photoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("instantiateItem", "onClick: " + position + "   count=" + container.getChildCount());
-//                    container.removeViewAt(nextPosition);
                 mPhotoItemOnClickListener.onPhotoClick();
             }
         });
-        Glide.with(mContext).load(mUrls.get(position)).centerCrop().into(photoView);
+        GlideApp.with(mContext).load(mUrls.get(position)).centerCrop().into(photoView);
         ViewGroup parent = (ViewGroup) photoView.getParent();
         if (parent != null) {
             parent.removeAllViews();
