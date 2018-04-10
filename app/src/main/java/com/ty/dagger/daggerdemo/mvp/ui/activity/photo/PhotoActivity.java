@@ -12,6 +12,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.ui.adapter.viewpageradapter.PhotoViewPagerAdapter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
+import com.ty.dagger.daggerdemo.mvp.utils.GlideApp;
 import com.ty.dagger.daggerdemo.mvp.widget.statuslayout.StatusBarUtils;
 
 import java.util.ArrayList;
@@ -57,10 +58,9 @@ public class PhotoActivity extends BaseActivity implements PhotoViewPagerAdapter
     private void showImg() {
         if (type == 0) {
             if (!imgUrl.equals("")) {
-                Glide.with(this).load(imgUrl).centerCrop().into(mPhotoImg);
+                Glide.with(this).load(imgUrl).into(mPhotoImg);
             } else {
-                Glide.with(this).load("http://t2.hddhhn.com/uploads/tu/201709/9999/b0d28560cf.jpg")
-                        .centerCrop()
+                GlideApp.with(this).load("http://t2.hddhhn.com/uploads/tu/201709/9999/b0d28560cf.jpg").centerCrop()
                         .into(mPhotoImg);
             }
         } else if (type == 1) {
