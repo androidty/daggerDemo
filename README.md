@@ -9,25 +9,21 @@
 ```java
 //判断是不是纯数字，不包含浮点数
 public boolean isNum(String str){
-     Pattern pattern = Pattern.compile("[0-9]{1,}");
-            Matcher matcher = pattern.matcher((CharSequence) str);
-    
-            boolean result = matcher.matches();
-    
-            if (result == true) {
-                System.out.println("该字符串是纯数字");
-                return true;
-            } else {
-                System.out.println("该字符串不是纯数字");
-                return false;
-            }
+    boolean result = str.matches("^-?\\d+$")
+    if (result == true) {
+        System.out.println("该字符串是纯数字");
+        return true;
+    } else {
+        System.out.println("该字符串不是纯数字");
+        return false;
+    }
 }
 ```
 
 ```java
 //判断是不是纯数字，包含浮点数
 public boolean isNum(String str){
-    String reg = "^[0-9]+(.[0-9]+)?$";
+    String reg = "^-?\\d+(\\.\\d+)?$";
     return str.matches(reg);
 }
 ```
