@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.entity.ImgList;
@@ -51,6 +52,7 @@ public class OtherFragment extends BaseFragment implements OtherContract.View {
     private void initRecycler() {
         mOtherAdapter = new OtherAdapter(R.layout.item_other,new ArrayList<ImgList>());
         mOtherRv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        mOtherAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
         mOtherRv.setAdapter(mOtherAdapter);
 //        mOtherAdapter.setOnLoadMoreListener(this, mOtherRv);
 //        mOtherAdapter.disableLoadMoreIfNotFullPage();
