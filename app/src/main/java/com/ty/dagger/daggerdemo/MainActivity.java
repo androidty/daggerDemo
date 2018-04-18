@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ty.dagger.daggerdemo.mvp.ui.activity.x5webview.X5WebViewActivity;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankActivity;
 import com.ty.dagger.daggerdemo.mvp.utils.LambdaStudy;
 import com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationNumView;
 import com.ty.dagger.daggerdemo.mvp.widget.dancenumview.DanceNumView;
@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
 //        });
         findViewById(R.id.button).setOnClickListener((view) -> {
             new LambdaStudy().study1("Lambda");
-//            startActivity(new Intent(this, GankActivity.class));
-            Intent intent = new Intent(MainActivity.this, X5WebViewActivity.class);
-            intent.putExtra("url","https://androidty.github" +
-                    ".io/2018/03/20/%E6%97%8B%E6%B6%A1%E7%9F%A9%E9%98%B5/");
-            startActivity(intent);
+            startActivity(new Intent(this, GankActivity.class));
+//            Intent intent = new Intent(MainActivity.this, X5WebViewActivity.class);
+//            intent.putExtra("url","https://androidty.github" +
+//                    ".io/2018/03/20/%E6%97%8B%E6%B6%A1%E7%9F%A9%E9%98%B5/");
+//            startActivity(intent);
         });
         mDnv = findViewById(R.id.dnv);
         mAtv = findViewById(R.id.atv);

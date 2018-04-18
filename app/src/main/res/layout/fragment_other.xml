@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:background="@color/tabColor"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/other_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/item_home"></include>
-        <include layout="@layout/item_home"></include>
-        <include layout="@layout/item_home"></include>
-        <include layout="@layout/item_home"></include>
-        <include layout="@layout/item_home"></include>
-        <include layout="@layout/item_home"></include>
-        <include layout="@layout/item_home"></include>
-        <include layout="@layout/item_home"></include>
+        android:layout_height="match_parent"/>
 
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

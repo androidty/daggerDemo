@@ -1,14 +1,17 @@
 package com.ty.dagger.daggerdemo.mvp.api;
 
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.entity.Img;
+import com.ty.dagger.daggerdemo.mvp.entity.ImgList;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 
@@ -33,20 +36,27 @@ public interface ApiService<T> {
     //all
     @Headers("baseurl:gank")
     @GET("api/data/{type}/10/{page}")
-    Observable<GankData<List<GankLastData>>> getGankDataList(@Path("type") String type, @Path("page") int
+    Observable<BaseData<List<GankData>>> getGankDataList(@Path("type") String type, @Path("page") int
             page);
 
 
     @Headers("baseurl:gank")
     @GET("api/random/data/{type}/{count}")
-    Observable<GankData<List<GankLastData>>> getRandomDataList(@Path("type") String type, @Path("count") int
+    Observable<BaseData<List<GankData>>> getRandomDataList(@Path("type") String type, @Path("count") int
             count);
 
 
     @Headers("baseurl:img")
     @GET("demodev/image/findAll")
-    Observable<GankData<List<Img>>> getImgs();
+    Observable<BaseData<List<Img>>> getImgs();
 
 
+    @Headers("baseurl:img")
+    @GET("demodev/image/findList")
+    Observable<BaseData<List<ImgList>>> getImgList();
+
+    @Headers("baseurl:img")
+    @POST("demodev/image/findImgsByNum")
+    Observable<BaseData<List<Img>>> getImgsByNum(@Field("num") String num);
 
 }

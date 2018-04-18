@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ty.dagger.daggerdemo.R;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.ui.adapter.recyclerviewadapter.HomeAdapter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseFragment;
@@ -59,7 +59,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
     }
 
     private void initRecycler() {
-        mHomeAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<GankLastData>());
+        mHomeAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<GankData>());
         mHomeRecyclerview.setLayoutManager(new LinearLayoutManager(mBaseActivity));
         mHomeRecyclerview.setAdapter(mHomeAdapter);
         mHomeAdapter.setOnLoadMoreListener(this, mHomeRecyclerview);
@@ -76,20 +76,20 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
     }
 
     @Override
-    public void returnAllData(GankData<List<GankLastData>> gankLastDatas) {
+    public void returnAllData(BaseData<List<GankData>> gankLastDatas) {
         mHomeAdapter.setNewData(gankLastDatas.getResults());
         mPresenter.requestImg();
     }
 
     @Override
-    public void returnMoreData(GankData<List<GankLastData>> gankLastDatas) {
+    public void returnMoreData(BaseData<List<GankData>> gankLastDatas) {
 
         mHomeAdapter.addData(gankLastDatas.getResults());
         mHomeAdapter.loadMoreComplete();
     }
 
     @Override
-    public void returnImg(GankData<List<Img>> imgs) {
+    public void returnImg(BaseData<List<Img>> imgs) {
         Log.d("returnImg", "returnImg: "+imgs.getResults().size());
         List<String> img = new ArrayList<>();
         for (int i = 0; i <imgs.getResults().size(); i++) {

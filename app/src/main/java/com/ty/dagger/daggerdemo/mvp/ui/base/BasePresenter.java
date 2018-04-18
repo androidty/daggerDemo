@@ -2,9 +2,9 @@ package com.ty.dagger.daggerdemo.mvp.ui.base;
 
 import com.ty.dagger.daggerdemo.mvp.api.ApiService;
 import com.ty.dagger.daggerdemo.mvp.api.config.Constants;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseGankRequest;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseRequest;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpPresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpView;
 
@@ -47,7 +47,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
     }
 
 
-    public <T> void RequestNormalData(final BaseGankRequest<T> baseRequest) {
+    public <T> void RequestNormalData(final BaseRequest<T> baseRequest) {
 
         mApiService.getGankDataList(baseRequest.getHashMap().get("type").toString(), baseRequest
                 .getIntegerHashMap().get("page"))
@@ -80,7 +80,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         });
     }
 
-    public <T> void RequestCombiData(final BaseGankRequest<T> baseRequest) {
+    public <T> void RequestCombiData(final BaseRequest<T> baseRequest) {
 
         Observable observable1 = mApiService.getGankDataList(baseRequest.getHashMap().get("type").toString
                 (), baseRequest
@@ -92,11 +92,11 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
             @Override
             public T apply(T t, T t2) throws Exception {
-                GankData gankData1 = (GankData) t;
-                GankData gankData2 = (GankData) t2;
-                List<GankLastData> gankLastDataList2 = (List<GankLastData>) gankData2.getResults();
+                BaseData gankData1 = (BaseData) t;
+                BaseData gankData2 = (BaseData) t2;
+                List<GankData> gankLastDataList2 = (List<GankData>) gankData2.getResults();
                 for (int i = 0; i < gankLastDataList2.size(); i++) {
-                    ((List<GankLastData>) gankData1.getResults()).get(i).setSource(
+                    ((List<GankData>) gankData1.getResults()).get(i).setSource(
                             (gankLastDataList2.get(i).getUrl()));
                 }
                 return (T) gankData1;
@@ -126,7 +126,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
     }
 
 
-    public <T> void RequestImg(final BaseGankRequest<T> baseRequest) {
+    public <T> void RequestImg(final BaseRequest<T> baseRequest) {
         mApiService.getImgs().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer() {
                     @Override
@@ -149,8 +149,31 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
                     }
                 });
+    }
 
+    public <T>void requestData(final BaseRequest<T> request) {
+        request.getObservable().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+                        request.getResponseCallback().onSuccess((T) o);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 

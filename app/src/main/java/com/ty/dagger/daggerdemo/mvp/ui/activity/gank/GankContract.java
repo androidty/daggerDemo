@@ -1,7 +1,7 @@
 package com.ty.dagger.daggerdemo.mvp.ui.activity.gank;
 
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpPresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.mvp.MvpView;
 
@@ -24,7 +24,7 @@ public class GankContract {
     }
 
     public interface View extends MvpView{
-        void showData(GankData<List<GankLastData>> gankLastDatas);
+        void showData(BaseData<List<GankData>> gankLastDatas);
 
         void showBanners(List<String> imgs);
     }

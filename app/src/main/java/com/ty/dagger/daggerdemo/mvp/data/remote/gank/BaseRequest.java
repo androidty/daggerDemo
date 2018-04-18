@@ -1,19 +1,31 @@
 package com.ty.dagger.daggerdemo.mvp.data.remote.gank;
 
+
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallback;
 
 import java.util.HashMap;
+
+import io.reactivex.Observable;
 
 /**
  * Created by ty on 2018/1/4.
  */
 
-public class BaseGankRequest<T> {
+public class BaseRequest<T> {
+    private Observable mObservable;
     private String url;
     private String Method;
     private ResponseCallback<T> mResponseCallback;
     private HashMap<?,?> mHashMap ;
     private HashMap<String,Integer> mIntegerHashMap;
+
+    public Observable getObservable() {
+        return mObservable;
+    }
+
+    public void setObservable(Observable observable) {
+        mObservable = observable;
+    }
 
     public String getUrl() {
         return url;
