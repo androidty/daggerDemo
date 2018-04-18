@@ -1,8 +1,8 @@
 package com.ty.dagger.daggerdemo.mvp.ui.fragment.ios;
 
 import com.ty.dagger.daggerdemo.R;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseFragment;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeContract;
@@ -30,15 +30,15 @@ public class IosFragment extends BaseFragment implements HomeContract.View{
     }
 
     @Override
-    public void returnAllData(GankData<List<GankLastData>> gankLastDatas) {
+    public void returnAllData(BaseData<List<GankData>> gankLastDatas) {
 
     }
     @Override
-    public void returnMoreData(GankData<List<GankLastData>> gankLastDatas) {
+    public void returnMoreData(BaseData<List<GankData>> gankLastDatas) {
     }
 
     @Override
-    public void returnImg(GankData<List<Img>> imgs) {
+    public void returnImg(BaseData<List<Img>> imgs) {
 
     }
 }

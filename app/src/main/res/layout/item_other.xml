@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="@dimen/dp_10"
+    >
+
+    <ImageView
+        android:id="@+id/item_other_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/evening"
+        />
+
+    <TextView
+        android:id="@+id/item_other_tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dnv"
+        android:textStyle="bold"
+        android:paddingLeft="3dp"
+        android:paddingTop="5dp"
+        android:textSize="@dimen/sp_20"
+        android:visibility="gone"
+        android:text="2"/>
+</android.support.v7.widget.CardView>

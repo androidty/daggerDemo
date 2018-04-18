@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.ty.dagger.daggerdemo.R;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoActivity;
 import com.ty.dagger.daggerdemo.mvp.utils.GlideApp;
 
@@ -21,20 +21,18 @@ import java.util.List;
  * Created by ty on 2018/2/7.
  */
 
-public class HomeAdapter extends BaseQuickAdapter<GankLastData, BaseViewHolder> {
+public class HomeAdapter extends BaseQuickAdapter<GankData, BaseViewHolder> {
 
 //    http://ohp3wewhw.bkt.clouddn.com/imgurls.json
 
     List<String> urlList = new ArrayList<>();
 
-    public HomeAdapter(int layoutResId, @Nullable List<GankLastData> data) {
+    public HomeAdapter(int layoutResId, @Nullable List<GankData> data) {
         super(layoutResId, data);
-
-
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final GankLastData item) {
+    protected void convert(BaseViewHolder helper, final GankData item) {
         helper.setText(R.id.item_author_tv, item.getWho()).setText(R.id.item_type_tv, item.getType()).setText
                 (R.id.item_desc_tv, item.getDesc()).setText(R.id.item_time_tv, item.getCreatedAt());
         GlideApp.with(mContext).load(item.getSource()).centerCrop().into((ImageView) helper

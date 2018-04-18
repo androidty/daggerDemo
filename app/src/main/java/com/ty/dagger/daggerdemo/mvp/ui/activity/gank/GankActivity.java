@@ -14,8 +14,8 @@ import android.widget.LinearLayout;
 
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.ui.adapter.viewpageradapter.GankPagerAdapter;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.android.AndroidFragment;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeFragment;
@@ -146,7 +146,7 @@ public class GankActivity extends BaseActivity implements GankContract.View {
 
 
     @Override
-    public void showData(GankData<List<GankLastData>> gankLastDatas) {
+    public void showData(BaseData<List<GankData>> gankLastDatas) {
         Log.d("GankActivity", "showData: " + gankLastDatas.getResults().get(0).getDesc());
     }
 

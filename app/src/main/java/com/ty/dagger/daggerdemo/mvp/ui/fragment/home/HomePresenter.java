@@ -5,9 +5,9 @@ import android.util.Log;
 import com.ty.dagger.daggerdemo.mvp.api.config.Constants;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallback;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallbackImpl;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseGankRequest;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseRequest;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankLastData;
 import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BasePresenter;
 
@@ -30,15 +30,15 @@ public class HomePresenter<V extends HomeContract.View> extends BasePresenter<V>
 
     @Override
     public void requestAllData() {
-        BaseGankRequest<GankData<List<GankLastData>>> baseGankRequest = new BaseGankRequest<GankData<List<GankLastData>>>();
+        BaseRequest<BaseData<List<GankData>>> baseGankRequest = new BaseRequest<BaseData<List<GankData>>>();
         HashMap<String, String> stringHashMap = new HashMap<>();
         stringHashMap.put("type", Constants.ALL);
         HashMap<String, Integer> integerHashMap = new HashMap<>();
         integerHashMap.put("page", 1);
 
-        ResponseCallback<GankData<List<GankLastData>>> gankLastDataResponseCallback = new ResponseCallbackImpl<GankData<List<GankLastData>>>() {
+        ResponseCallback<BaseData<List<GankData>>> gankLastDataResponseCallback = new ResponseCallbackImpl<BaseData<List<GankData>>>() {
             @Override
-            public void onSuccess(GankData<List<GankLastData>> response) {
+            public void onSuccess(BaseData<List<GankData>> response) {
                 getMvpView().returnAllData(response);
             }
         };
@@ -52,15 +52,15 @@ public class HomePresenter<V extends HomeContract.View> extends BasePresenter<V>
 
     @Override
     public void getMoreData(int page) {
-        BaseGankRequest<GankData<List<GankLastData>>> baseGankRequest = new BaseGankRequest<GankData<List<GankLastData>>>();
+        BaseRequest<BaseData<List<GankData>>> baseGankRequest = new BaseRequest<BaseData<List<GankData>>>();
         HashMap<String, String> stringHashMap = new HashMap<>();
         stringHashMap.put("type", Constants.ALL);
         HashMap<String, Integer> integerHashMap = new HashMap<>();
         integerHashMap.put("page", page);
 
-        ResponseCallback<GankData<List<GankLastData>>> gankLastDataResponseCallback = new ResponseCallbackImpl<GankData<List<GankLastData>>>() {
+        ResponseCallback<BaseData<List<GankData>>> gankLastDataResponseCallback = new ResponseCallbackImpl<BaseData<List<GankData>>>() {
             @Override
-            public void onSuccess(GankData<List<GankLastData>> response) {
+            public void onSuccess(BaseData<List<GankData>> response) {
                 Log.d("onNextaa", "onSuccess: ");
                 getMvpView().returnMoreData(response);
             }
@@ -75,10 +75,10 @@ public class HomePresenter<V extends HomeContract.View> extends BasePresenter<V>
 
     @Override
     public void requestImg() {
-        BaseGankRequest<GankData<List<Img>>> baseGankRequest = new BaseGankRequest<GankData<List<Img>>>();
-        ResponseCallback<GankData<List<Img>>> gankLastDataResponseCallback = new ResponseCallbackImpl<GankData<List<Img>>>() {
+        BaseRequest<BaseData<List<Img>>> baseGankRequest = new BaseRequest<BaseData<List<Img>>>();
+        ResponseCallback<BaseData<List<Img>>> gankLastDataResponseCallback = new ResponseCallbackImpl<BaseData<List<Img>>>() {
             @Override
-            public void onSuccess(GankData<List<Img>> response) {
+            public void onSuccess(BaseData<List<Img>> response) {
                 getMvpView().returnImg(response);
             }
         };
