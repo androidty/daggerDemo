@@ -74,9 +74,6 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
             }
 
 
-
-
-
         });
     }
 
@@ -151,7 +148,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
                 });
     }
 
-    public <T>void requestData(final BaseRequest<T> request) {
+    public <T> void requestData(final BaseRequest<T> request) {
         request.getObservable().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer() {
                     @Override

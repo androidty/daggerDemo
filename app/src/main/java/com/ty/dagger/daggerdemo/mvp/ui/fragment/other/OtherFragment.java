@@ -1,16 +1,19 @@
 package com.ty.dagger.daggerdemo.mvp.ui.fragment.other;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.entity.ImgList;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.adapter.otheradapter.OtherAdapter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseFragment;
 
@@ -27,12 +30,14 @@ import butterknife.Unbinder;
  * Created by ty on 2018/2/6.
  */
 
-public class OtherFragment extends BaseFragment implements OtherContract.View {
+public class OtherFragment extends BaseFragment implements OtherContract.View,BaseQuickAdapter.RequestLoadMoreListener {
     @Inject
     OtherPresenter<OtherContract.View> mPresenter;
     @BindView(R.id.other_rv)
     RecyclerView mOtherRv;
     Unbinder unbinder;
+
+    int page = 1,count=6;
 
     private OtherAdapter mOtherAdapter;
 
@@ -51,9 +56,26 @@ public class OtherFragment extends BaseFragment implements OtherContract.View {
     private void initRecycler() {
         mOtherAdapter = new OtherAdapter(R.layout.item_other,new ArrayList<ImgList>());
         mOtherRv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        mOtherAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
         mOtherRv.setAdapter(mOtherAdapter);
-//        mOtherAdapter.setOnLoadMoreListener(this, mOtherRv);
-//        mOtherAdapter.disableLoadMoreIfNotFullPage();
+        mOtherAdapter.setOnLoadMoreListener(this, mOtherRv);
+        mOtherAdapter.disableLoadMoreIfNotFullPage();
+
+       mOtherRv.addOnItemTouchListener(new OnItemClickListener() {
+           @Override
+           public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+               openPhotoActivity(position);
+           }
+
+
+       });
+    }
+    private void openPhotoActivity(int position) {
+        //把编号传过去
+        Intent intent = new Intent(mBaseActivity, PhotoActivity.class);
+        intent.putExtra("type",-1);
+        intent.putExtra("num",mOtherAdapter.getItem(position).getNum());
+        startActivity(intent);
     }
     private void initData() {
         mPresenter.requestImgList();
@@ -68,12 +90,19 @@ public class OtherFragment extends BaseFragment implements OtherContract.View {
 
     @Override
     public void returnImgList(BaseData<List<ImgList>> imgList) {
-        Log.d("returnImgList", "returnImgList: " + imgList.getResults().size());
         mOtherAdapter.setNewData(imgList.getResults());
     }
 
     @Override
     public void returnMoreImgList(BaseData<List<ImgList>> imgList) {
+        if(imgList.getResults().size()==0){
+            mOtherAdapter.loadMoreEnd(true);
+            mOtherAdapter.addFooterView(getLayoutInflater().inflate(R.layout.item_other_footer,null));
+        }else{
+            mOtherAdapter.removeAllFooterView();
+            mOtherAdapter.addData(imgList.getResults());
+            mOtherAdapter.loadMoreComplete();
+        }
 
     }
 
@@ -89,5 +118,11 @@ public class OtherFragment extends BaseFragment implements OtherContract.View {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        page++;//进行page+1
+        mPresenter.loadMoreImgList(page*count,count);
     }
 }

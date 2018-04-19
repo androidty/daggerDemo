@@ -23,4 +23,5 @@ public interface ActivityComponent {
 
     void inject(OtherFragment otherFragment);
 
+
 }

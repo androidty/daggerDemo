@@ -21,6 +21,6 @@ public class OtherContract {
     public interface Presenter<V extends OtherContract.View> extends MvpPresenter<V> {
         void requestImgList();
 
-        void loadMoreImgList();
+        void loadMoreImgList(int from,int count);
     }
 }

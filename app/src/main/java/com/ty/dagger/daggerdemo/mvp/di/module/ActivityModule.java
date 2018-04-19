@@ -2,6 +2,8 @@ package com.ty.dagger.daggerdemo.mvp.di.module;
 
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankContract;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankPresenter;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoContract;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoPresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeContract;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomePresenter;
@@ -41,8 +43,15 @@ public class ActivityModule {
     }
 
     @Provides
-    public OtherContract.Presenter<OtherContract.View> provideOtherPresenter(OtherPresenter<OtherContract.View>
-                                                                                         presenter) {
+    public OtherContract.Presenter<OtherContract.View> provideOtherPresenter(OtherPresenter<OtherContract
+            .View>
+                                                                                     presenter) {
+        return presenter;
+    }
+
+    @Provides
+    public PhotoContract.Presenter<PhotoContract.View> providePhotoPresenter(PhotoPresenter<PhotoContract
+            .View> presenter) {
         return presenter;
     }
 

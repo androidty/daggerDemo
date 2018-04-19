@@ -7,15 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.ty.dagger.daggerdemo.R;
-import com.ty.dagger.daggerdemo.mvp.ui.adapter.viewpageradapter.GankPagerAdapter;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
+import com.ty.dagger.daggerdemo.mvp.ui.adapter.viewpageradapter.GankPagerAdapter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.android.AndroidFragment;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeFragment;
@@ -147,7 +146,6 @@ public class GankActivity extends BaseActivity implements GankContract.View {
 
     @Override
     public void showData(BaseData<List<GankData>> gankLastDatas) {
-        Log.d("GankActivity", "showData: " + gankLastDatas.getResults().get(0).getDesc());
     }
 
     @Override

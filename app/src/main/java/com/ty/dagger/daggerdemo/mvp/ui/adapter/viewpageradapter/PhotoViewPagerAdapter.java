@@ -2,7 +2,6 @@ package com.ty.dagger.daggerdemo.mvp.ui.adapter.viewpageradapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +58,7 @@ public class PhotoViewPagerAdapter extends PagerAdapter {
                 mPhotoItemOnClickListener.onPhotoClick();
             }
         });
-        GlideApp.with(mContext).load(mUrls.get(position)).centerCrop().into(photoView);
+        GlideApp.with(mContext).load(mUrls.get(position)).optionalCenterCrop().into(photoView);
         ViewGroup parent = (ViewGroup) photoView.getParent();
         if (parent != null) {
             parent.removeAllViews();

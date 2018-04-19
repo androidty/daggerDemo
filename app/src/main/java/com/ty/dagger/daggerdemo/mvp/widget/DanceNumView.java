@@ -8,7 +8,6 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.ty.dagger.daggerdemo.R;
@@ -50,9 +49,7 @@ public class DanceNumView extends android.support.v7.widget.AppCompatTextView {
         while (matcher.find()) {
             this.numbers.add(Float.valueOf(Float.parseFloat(matcher.group())));
         }
-        for (int i = 0; i < this.numbers.size(); i++) {
-            Log.d("dance", "" + numbers.get(i));
-        }
+
 
         this.textPattern = this.text.replaceAll("\\d+(\\.\\d+)?", "@@@");
         this.numberTemp = new float[this.numbers.size()];
