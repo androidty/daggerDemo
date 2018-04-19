@@ -90,7 +90,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
 
     @Override
     public void returnImg(BaseData<List<Img>> imgs) {
-        Log.d("returnImg", "returnImg: "+imgs.getResults().size());
         List<String> img = new ArrayList<>();
         for (int i = 0; i <imgs.getResults().size(); i++) {
             img.add(imgs.getResults().get(i).getUrl());

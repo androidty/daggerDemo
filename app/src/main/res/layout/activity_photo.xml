@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@color/black">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/photo_img"
         android:layout_width="match_parent"
@@ -27,7 +38,10 @@
         android:layout_marginBottom="12dp"
         android:background="@color/transparent"
         android:text="3/20"
+        android:textColor="@color/material_white85"
         android:textSize="18sp"/>
 
+    </RelativeLayout>
 
-</RelativeLayout>
+
+</FrameLayout>

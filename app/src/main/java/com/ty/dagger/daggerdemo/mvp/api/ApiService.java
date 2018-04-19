@@ -9,10 +9,12 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 /**
@@ -52,11 +54,12 @@ public interface ApiService<T> {
 
 
     @Headers("baseurl:img")
-    @GET("demodev/image/findList")
-    Observable<BaseData<List<ImgList>>> getImgList();
+    @POST("demodev/image/findList")
+    Observable<BaseData<List<ImgList>>> getImgList(@Query("from") int from, @Query("count") int count);
 
+    @FormUrlEncoded
     @Headers("baseurl:img")
     @POST("demodev/image/findImgsByNum")
-    Observable<BaseData<List<Img>>> getImgsByNum(@Field("num") String num);
+    Observable<BaseData<List<Img>>> getImgsByNum(@Field("num") int num);
 
 }

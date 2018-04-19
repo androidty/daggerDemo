@@ -173,7 +173,6 @@ public class PendulumView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.d("firstX", "onSizeChanged: ");
         dotX = w / 2;
         dotY = h / 3;
         lineLength = h / 3;

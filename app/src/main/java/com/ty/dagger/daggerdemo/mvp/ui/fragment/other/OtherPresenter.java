@@ -32,14 +32,24 @@ public class OtherPresenter<V extends OtherContract.View> extends BasePresenter<
                 getMvpView().returnImgList(response);
             }
         };
-        baseGankRequest.setObservable(mApiService.getImgList());
+        baseGankRequest.setObservable(mApiService.getImgList(0,6));
         baseGankRequest.setMethod("GET");
         baseGankRequest.setResponseCallback(gankLastDataResponseCallback);
         requestData(baseGankRequest);
     }
 
     @Override
-    public void loadMoreImgList() {
-
+    public void loadMoreImgList(int from,int count) {
+        BaseRequest<BaseData<List<ImgList>>> baseGankRequest = new BaseRequest<BaseData<List<ImgList>>>();
+        ResponseCallback<BaseData<List<ImgList>>> gankLastDataResponseCallback = new ResponseCallbackImpl<BaseData<List<ImgList>>>() {
+            @Override
+            public void onSuccess(BaseData<List<ImgList>> response) {
+                getMvpView().returnMoreImgList(response);
+            }
+        };
+        baseGankRequest.setObservable(mApiService.getImgList(from,count));
+        baseGankRequest.setMethod("GET");
+        baseGankRequest.setResponseCallback(gankLastDataResponseCallback);
+        requestData(baseGankRequest);
     }
 }
