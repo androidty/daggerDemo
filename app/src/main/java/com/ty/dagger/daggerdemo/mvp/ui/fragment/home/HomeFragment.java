@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +51,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
 
     @Override
     public void initViews() {
-        mPresenter.requestAllData();
+//        mPresenter.requestAllData();
 
         initData();
         initRecycler();
@@ -64,6 +63,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
         mHomeRecyclerview.setAdapter(mHomeAdapter);
         mHomeAdapter.setOnLoadMoreListener(this, mHomeRecyclerview);
         mHomeAdapter.disableLoadMoreIfNotFullPage();
+
+
     }
 
     private void initData() {
@@ -78,7 +79,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
     @Override
     public void returnAllData(BaseData<List<GankData>> gankLastDatas) {
         mHomeAdapter.setNewData(gankLastDatas.getResults());
-        mPresenter.requestImg();
+//        mPresenter.requestImg();
     }
 
     @Override

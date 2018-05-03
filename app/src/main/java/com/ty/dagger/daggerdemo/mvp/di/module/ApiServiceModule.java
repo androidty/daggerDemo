@@ -53,6 +53,8 @@ public class ApiServiceModule {
                         newBaseUrl = HttpUrl.parse(Constants.IMGURL);
                     } else if (headers.contains(Constants.GANK)) {
                         newBaseUrl = HttpUrl.parse(Constants.GANKURL);
+                    }else if(headers.contains(Constants.HUOBI)){
+                        newBaseUrl = HttpUrl.parse(Constants.HUOBI_URL);
                     } else {
                         newBaseUrl = oldHttpUrl;
                     }

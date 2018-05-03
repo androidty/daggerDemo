@@ -4,6 +4,7 @@ import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.entity.ImgList;
+import com.ty.dagger.daggerdemo.mvp.huobi.entity.HuoBiAccount;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 
 /**
@@ -61,5 +63,10 @@ public interface ApiService<T> {
     @Headers("baseurl:img")
     @POST("demodev/image/findImgsByNum")
     Observable<BaseData<List<Img>>> getImgsByNum(@Field("num") int num);
+
+
+    @Headers("baseurl:huobi")
+    @GET
+    Observable<HuoBiAccount> getHuoBiAccount(@Url String url);
 
 }

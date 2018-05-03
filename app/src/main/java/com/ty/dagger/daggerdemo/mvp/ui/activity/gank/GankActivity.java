@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
@@ -80,6 +81,7 @@ public class GankActivity extends BaseActivity implements GankContract.View {
 //        StatusBarUtils.setStatusColor(this,0,0);
         StatusBarUtils.setTranslucentStatusBar(GankActivity.this, mToolbar, 0);
         mGankPresenter.getBanners();
+        mGankPresenter.getGankData();
         mTablayout.setupWithViewPager(mViewpager);
 
         initAppBar();
@@ -187,5 +189,13 @@ public class GankActivity extends BaseActivity implements GankContract.View {
         }
     }
 
+    @Override
+    public void showToast(int resId) {
+        super.showToast(resId);
+    }
 
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show();
+    }
 }

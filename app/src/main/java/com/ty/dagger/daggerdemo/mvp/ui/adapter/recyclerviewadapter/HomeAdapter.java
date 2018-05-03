@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
-import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoActivity;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.x5webview.X5WebViewActivity;
 import com.ty.dagger.daggerdemo.mvp.utils.GlideApp;
 
 import java.util.ArrayList;
@@ -41,14 +41,10 @@ public class HomeAdapter extends BaseQuickAdapter<GankData, BaseViewHolder> {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), PhotoActivity.class);
-                intent.putExtra("type", 1);
-//                intent.putExtra("imgUrl",item.getSource());
-                intent.putStringArrayListExtra("imgUrls", (ArrayList<String>) urlList);
-                view.getContext().startActivity(intent);
-//                view.getContext().startActivity(intent,
-//                        ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view,
-//                                "sharedView").toBundle());
+                Intent intent = new Intent(view.getContext(), X5WebViewActivity.class);
+                intent.putExtra("url",item.getUrl());
+                mContext.startActivity(intent);
+
             }
         });
         if (helper.getAdapterPosition() == 3) {

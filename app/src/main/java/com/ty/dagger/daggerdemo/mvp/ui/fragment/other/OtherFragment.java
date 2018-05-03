@@ -30,14 +30,15 @@ import butterknife.Unbinder;
  * Created by ty on 2018/2/6.
  */
 
-public class OtherFragment extends BaseFragment implements OtherContract.View,BaseQuickAdapter.RequestLoadMoreListener {
+public class OtherFragment extends BaseFragment implements OtherContract.View, BaseQuickAdapter
+        .RequestLoadMoreListener {
     @Inject
     OtherPresenter<OtherContract.View> mPresenter;
     @BindView(R.id.other_rv)
     RecyclerView mOtherRv;
     Unbinder unbinder;
 
-    int page = 1,count=6;
+    int page = 1, count = 6;
 
     private OtherAdapter mOtherAdapter;
 
@@ -48,44 +49,45 @@ public class OtherFragment extends BaseFragment implements OtherContract.View,Ba
 
     @Override
     public void initViews() {
-
         initRecycler();
         initData();
     }
 
     private void initRecycler() {
-        mOtherAdapter = new OtherAdapter(R.layout.item_other,new ArrayList<ImgList>());
-        mOtherRv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        mOtherAdapter = new OtherAdapter(R.layout.item_other, new ArrayList<ImgList>());
+        mOtherRv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mOtherAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
         mOtherRv.setAdapter(mOtherAdapter);
         mOtherAdapter.setOnLoadMoreListener(this, mOtherRv);
         mOtherAdapter.disableLoadMoreIfNotFullPage();
 
-       mOtherRv.addOnItemTouchListener(new OnItemClickListener() {
-           @Override
-           public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-               openPhotoActivity(position);
-           }
+        mOtherRv.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                openPhotoActivity(position);
+            }
 
 
-       });
+        });
     }
+
     private void openPhotoActivity(int position) {
         //把编号传过去
         Intent intent = new Intent(mBaseActivity, PhotoActivity.class);
-        intent.putExtra("type",-1);
-        intent.putExtra("num",mOtherAdapter.getItem(position).getNum());
+        intent.putExtra("type", -1);
+        intent.putExtra("num", mOtherAdapter.getItem(position).getNum());
         startActivity(intent);
     }
+
     private void initData() {
         mPresenter.requestImgList();
     }
+
     @Override
     public void injectView() {
         getActivityComponent().inject(this);
         mPresenter.onAttach(this);
     }
-
 
 
     @Override
@@ -95,10 +97,10 @@ public class OtherFragment extends BaseFragment implements OtherContract.View,Ba
 
     @Override
     public void returnMoreImgList(BaseData<List<ImgList>> imgList) {
-        if(imgList.getResults().size()==0){
+        if (imgList.getResults().size() == 0) {
             mOtherAdapter.loadMoreEnd(true);
-            mOtherAdapter.addFooterView(getLayoutInflater().inflate(R.layout.item_other_footer,null));
-        }else{
+            mOtherAdapter.addFooterView(getLayoutInflater().inflate(R.layout.item_other_footer, null));
+        } else {
             mOtherAdapter.removeAllFooterView();
             mOtherAdapter.addData(imgList.getResults());
             mOtherAdapter.loadMoreComplete();
@@ -123,6 +125,6 @@ public class OtherFragment extends BaseFragment implements OtherContract.View,Ba
     @Override
     public void onLoadMoreRequested() {
         page++;//进行page+1
-        mPresenter.loadMoreImgList(page*count,count);
+        mPresenter.loadMoreImgList(page * count, count);
     }
 }
