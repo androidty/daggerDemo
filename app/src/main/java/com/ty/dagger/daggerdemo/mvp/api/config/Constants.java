@@ -18,4 +18,7 @@ public interface Constants {
     String IMG = "img";
 
 
+    String HUOBI_URL = "https://api.huobi.pro/";
+    String HUOBI = "huobi";
+
 }

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ty.dagger.daggerdemo.mvp.huobi.HuoBiSign;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankActivity;
 import com.ty.dagger.daggerdemo.mvp.utils.LambdaStudy;
 import com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationNumView;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         StatusBarUtils.setTranslucentStatusBar(this, null, 0);
         mAtv.setStaticText("3520928429.908", 2);
         mAtv.setAnimationText("13214.43", 3);
-
+        Toast.makeText(this, HuoBiSign.getUTCTime(), Toast.LENGTH_SHORT).show();
 //        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
