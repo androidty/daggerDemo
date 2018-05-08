@@ -6,9 +6,11 @@ import com.ty.dagger.daggerdemo.mvp.api.TestApi;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallback;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallbackImpl;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseRequest;
-import com.ty.dagger.daggerdemo.mvp.huobi.HuoBiSign;
-import com.ty.dagger.daggerdemo.mvp.huobi.entity.HuoBiAccount;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BasePresenter;
+import com.ty.dagger.daggerdemo.mvp.wallet.gate.BuildGate;
+import com.ty.dagger.daggerdemo.mvp.wallet.gate.entity.GateBalance;
+import com.ty.dagger.daggerdemo.mvp.wallet.huobi.HuoBiSign;
+import com.ty.dagger.daggerdemo.mvp.wallet.huobi.entity.HuoBiAccount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,8 @@ public class GankPresenter<V extends GankContract.View> extends BasePresenter<V>
 
     @Override
     public void getGankData() {
-        getHuobi();
+//        getHuobi();
+        getGateBalance();
     }
 
     @Override
@@ -42,6 +45,10 @@ public class GankPresenter<V extends GankContract.View> extends BasePresenter<V>
         getMvpView().showBanners(imgs);
     }
 
+
+    /**
+     * 获取火币accountid
+     */
     public void getHuobi(){
         BaseRequest<HuoBiAccount> baseGankRequest = new BaseRequest<HuoBiAccount>();
         ResponseCallback<HuoBiAccount> gankLastDataResponseCallback = new
@@ -62,6 +69,20 @@ public class GankPresenter<V extends GankContract.View> extends BasePresenter<V>
         baseGankRequest.setObservable(mApiService.getHuoBiAccount(HuoBiSign.getUrl()));
         baseGankRequest.setResponseCallback(gankLastDataResponseCallback);
         requestData(baseGankRequest);
+    }
+
+    public void getGateBalance(){
+        BaseRequest<GateBalance> baseRequest = new BaseRequest<>();
+        ResponseCallback<GateBalance> gateBalanceResponseCallback = new ResponseCallbackImpl<GateBalance>() {
+            @Override
+            public void onSuccess(GateBalance response) {
+                Log.d(TAG, "onSuccess: "+response.getResult());
+                getMvpView().showToast(response.getResult());
+            }
+        };
+        baseRequest.setObservable(mApiService.getGateBalance(BuildGate.getHeaders(),BuildGate.getUrl()));
+        baseRequest.setResponseCallback(gateBalanceResponseCallback);
+        requestData(baseRequest);
     }
 
 

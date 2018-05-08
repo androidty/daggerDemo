@@ -1,7 +1,8 @@
-package com.ty.dagger.daggerdemo.mvp.huobi;
+package com.ty.dagger.daggerdemo.mvp.wallet.huobi;
 
 import android.text.TextUtils;
-import android.util.Log;
+
+import com.ty.dagger.daggerdemo.mvp.wallet.Base64Util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

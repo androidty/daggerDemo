@@ -1,4 +1,4 @@
-package com.ty.dagger.daggerdemo.mvp.huobi;
+package com.ty.dagger.daggerdemo.mvp.wallet;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -131,7 +131,6 @@ public class Base64Util {
             throw new Error("Miscalculated data length (wrote " + index
                     + " instead of " + out.length + ")");
         }
-
         return out;
     }
 

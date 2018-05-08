@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ty.dagger.daggerdemo.mvp.huobi.HuoBiSign;
+import com.ty.dagger.daggerdemo.mvp.wallet.huobi.HuoBiSign;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankActivity;
 import com.ty.dagger.daggerdemo.mvp.utils.LambdaStudy;
 import com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationNumView;

@@ -1,4 +1,4 @@
-package com.ty.dagger.daggerdemo.mvp.huobi.entity;
+package com.ty.dagger.daggerdemo.mvp.wallet.huobi.entity;
 
 import com.google.gson.annotations.SerializedName;
 

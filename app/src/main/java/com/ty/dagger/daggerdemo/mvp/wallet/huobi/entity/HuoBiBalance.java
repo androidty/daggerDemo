@@ -1,4 +1,4 @@
-package com.ty.dagger.daggerdemo.mvp.huobi.entity;
+package com.ty.dagger.daggerdemo.mvp.wallet.huobi.entity;
 
 /**
  * Created by ty on 2018/5/3.
