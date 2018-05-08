@@ -4,14 +4,17 @@ import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.entity.ImgList;
-import com.ty.dagger.daggerdemo.mvp.huobi.entity.HuoBiAccount;
+import com.ty.dagger.daggerdemo.mvp.wallet.gate.entity.GateBalance;
+import com.ty.dagger.daggerdemo.mvp.wallet.huobi.entity.HuoBiAccount;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -68,5 +71,8 @@ public interface ApiService<T> {
     @Headers("baseurl:huobi")
     @GET
     Observable<HuoBiAccount> getHuoBiAccount(@Url String url);
+
+    @POST
+    Observable<GateBalance> getGateBalance(@HeaderMap Map<String,String> headers,@Url String url);
 
 }
