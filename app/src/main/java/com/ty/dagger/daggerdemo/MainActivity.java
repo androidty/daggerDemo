@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
         findViewById(R.id.button).setOnClickListener((view) -> {
             new LambdaStudy().study1("Lambda");
-            startActivity(new Intent(this, GankActivity.class));
+            startActivity(new Intent(this, PieChatActivity.class));
 //            Intent intent = new Intent(MainActivity.this, X5WebViewActivity.class);
 //            intent.putExtra("url","https://androidty.github" +
 //                    ".io/2018/03/20/%E6%97%8B%E6%B6%A1%E7%9F%A9%E9%98%B5/");

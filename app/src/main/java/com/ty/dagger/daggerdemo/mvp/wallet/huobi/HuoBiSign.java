@@ -80,9 +80,9 @@ public class HuoBiSign {
 
     public static String getUrl() {
         createSignature(accessKey, secretKey, "GET", "api.huobi.pro",
-                "/v1/account/accounts", params);
+                "/v1/account/accounts/1249364/balance", params);
         String s = formatUrlMap(params, true, false);
-        String url = "https://api.huobi.pro/v1/account/accounts?" + s;
+        String url = "https://api.huobi.pro/v1/account/accounts/1249364/balance?" + s;
         params.clear();
         return url;
     }

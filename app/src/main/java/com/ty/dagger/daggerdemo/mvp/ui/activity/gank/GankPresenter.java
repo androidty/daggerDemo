@@ -31,8 +31,8 @@ public class GankPresenter<V extends GankContract.View> extends BasePresenter<V>
 
     @Override
     public void getGankData() {
-//        getHuobi();
-        getGateBalance();
+        getHuobi();
+//        getGateBalance();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class GankPresenter<V extends GankContract.View> extends BasePresenter<V>
             public void onSuccess(HuoBiAccount response) {
 //                getMvpView().returnMoreImgList(response);
 
-                Log.d(TAG, "onSuccess: "+response.getStatus());
+                Log.d(TAG, "onSuccess: "+response.getData());
                 if(response.getStatus().equals("error")){
                     getMvpView().showToast(response.getErrmsg().toString());
                 }else{
