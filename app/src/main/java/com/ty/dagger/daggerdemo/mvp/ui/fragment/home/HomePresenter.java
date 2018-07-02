@@ -5,8 +5,8 @@ import android.util.Log;
 import com.ty.dagger.daggerdemo.mvp.api.config.Constants;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallback;
 import com.ty.dagger.daggerdemo.mvp.data.remote.ResponseCallbackImpl;
-import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseRequest;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
+import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseRequest;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
 import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BasePresenter;
@@ -81,6 +81,8 @@ public class HomePresenter<V extends HomeContract.View> extends BasePresenter<V>
             public void onSuccess(BaseData<List<Img>> response) {
                 getMvpView().returnImg(response);
             }
+
+
         };
 
 

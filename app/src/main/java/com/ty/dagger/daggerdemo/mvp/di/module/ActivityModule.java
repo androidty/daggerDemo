@@ -5,8 +5,6 @@ import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankPresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoContract;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoPresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
-import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeContract;
-import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomePresenter;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.other.OtherContract;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.other.OtherPresenter;
 
@@ -36,11 +34,11 @@ public class ActivityModule {
     }
 
 
-    @Provides
-    public HomeContract.Presenter<HomeContract.View> provideHomePresenter(HomePresenter<HomeContract.View>
-                                                                                  presenter) {
-        return presenter;
-    }
+//    @Provides
+//    public HomeContract.Presenter<HomeContract.View> provideHomePresenter(HomePresenter<HomeContract.View>
+//                                                                                  presenter) {
+//        return presenter;
+//    }
 
     @Provides
     public OtherContract.Presenter<OtherContract.View> provideOtherPresenter(OtherPresenter<OtherContract

@@ -42,7 +42,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
 
     private HomeAdapter mHomeAdapter;
     @Inject
-    HomeContract.Presenter<HomeContract.View> mPresenter;
+    HomePresenter<HomeContract.View> mPresenter;
 
     @Override
     public int getLayoutId() {
@@ -51,7 +51,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,
 
     @Override
     public void initViews() {
-//        mPresenter.requestAllData();
+        mPresenter.requestAllData();
 
         initData();
         initRecycler();

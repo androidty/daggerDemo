@@ -19,7 +19,7 @@ import com.ty.dagger.daggerdemo.mvp.ui.adapter.viewpageradapter.GankPagerAdapter
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.android.AndroidFragment;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeFragment;
-import com.ty.dagger.daggerdemo.mvp.ui.fragment.ios.IosFragment;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.food.FoodFragment;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.other.OtherFragment;
 import com.ty.dagger.daggerdemo.mvp.widget.banner.GlideImageLoader;
 import com.ty.dagger.daggerdemo.mvp.widget.statuslayout.StatusBarUtils;
@@ -63,7 +63,7 @@ public class GankActivity extends BaseActivity implements GankContract.View {
 
     private HomeFragment mHomeFragment;
     private AndroidFragment mAndroidFragment;
-    private IosFragment mIosFragment;
+    private FoodFragment mFoodFragment;
     private OtherFragment mOtherFragment;
 
     private List<Fragment> mFragments = new ArrayList<>();
@@ -179,9 +179,9 @@ public class GankActivity extends BaseActivity implements GankContract.View {
             mAndroidFragment = new AndroidFragment();
             mFragments.add(mAndroidFragment);
         }
-        if (mIosFragment == null) {
-            mIosFragment = new IosFragment();
-            mFragments.add(mIosFragment);
+        if (mFoodFragment == null) {
+            mFoodFragment = new FoodFragment();
+            mFragments.add(mFoodFragment);
         }
         if (mOtherFragment == null) {
             mOtherFragment = new OtherFragment();
