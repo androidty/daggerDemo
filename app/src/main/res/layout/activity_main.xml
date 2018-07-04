@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ty.dagger.daggerdemo.MainActivity"
     android:background="@mipmap/back"
+    tools:context="com.ty.dagger.daggerdemo.MainActivity"
     tools:layout_editor_absoluteY="81dp">
-    <com.ty.dagger.daggerdemo.dagger.PendulumView
+
+    <com.ty.dagger.daggerdemo.mvp.ui.customview.PendulumView
         android:id="@+id/pendulumView"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -17,34 +18,35 @@
         android:layout_marginStart="67dp"
         android:layout_marginTop="131dp"
         android:background="#58e6dd"
-        app:amplitude="40"
-        app:ballColor="#8c8d8b"
-        app:ballRadius="25"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lineColor="#000"
-        app:totalNum="5"/>
+        app:amplitude="40"
+        app:ballColor="@color/colorAccent"
+        app:ballRadius="25"
+        app:totalNum="7"
+        app:lineColor="#504040"/>
 
     <com.ty.dagger.daggerdemo.mvp.widget.dancenumview.DanceNumView
         android:id="@+id/dnv"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="@dimen/dp_5"
+        android:gravity="center"
         android:singleLine="true"
         android:text="6171978"
-        android:gravity="center"
         android:textColor="@color/dnv"
         android:textSize="@dimen/sp_26"
         android:textStyle="bold"/>
-<EditText
-    android:id="@+id/et"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    app:layout_constraintTop_toBottomOf="@+id/atv"
-    />
+
+    <EditText
+        android:id="@+id/et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/atv"
+        />
 
     <Button
         android:id="@+id/button"
@@ -60,12 +62,12 @@
 
     <com.ty.dagger.daggerdemo.mvp.widget.animationtextview.AnimationNumView
         android:id="@+id/atv"
-        app:layout_constraintTop_toBottomOf="@+id/dnv"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"
+        android:textColor="@android:color/holo_blue_bright"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@android:color/holo_blue_bright"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@+id/dnv"/>
 </android.support.constraint.ConstraintLayout>

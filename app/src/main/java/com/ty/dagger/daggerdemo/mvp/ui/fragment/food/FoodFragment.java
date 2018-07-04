@@ -1,5 +1,6 @@
 package com.ty.dagger.daggerdemo.mvp.ui.fragment.food;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ty.dagger.daggerdemo.R;
 import com.ty.dagger.daggerdemo.mvp.entity.Food;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.fooddetail.FoodDetailActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.adapter.recyclerviewadapter.FoodAdapter;
 import com.ty.dagger.daggerdemo.mvp.ui.base.BaseFragment;
 
@@ -46,9 +49,17 @@ public class FoodFragment extends BaseFragment implements FoodContract.View {
     @Override
     public void initViews() {
         mFoodRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mFoodAdapter = new FoodAdapter(R.layout.item_food,new ArrayList<Food>());
+        mFoodAdapter = new FoodAdapter(R.layout.item_food, new ArrayList<Food>());
         mFoodRecyclerview.setAdapter(mFoodAdapter);
         mPresenter.requestFoods();
+        mFoodAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getActivity(), FoodDetailActivity.class);
+                intent.putExtra("foodId", mFoodAdapter.getData().get(position).getId());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -66,10 +77,11 @@ public class FoodFragment extends BaseFragment implements FoodContract.View {
 
     @Override
     public void returnFoods(List<Food> foodList) {
-        if(foodList!=null&&!foodList.isEmpty()){
-            for (int i = 0; i <foodList.size() ; i++) {
+        if (foodList != null && !foodList.isEmpty()) {
+            for (int i = 0; i < foodList.size(); i++) {
                 Food food = foodList.get(i);
-                Log.d("returnfoods", "returnFoods: "+food.getTitle()+"  "+food.getContent()+"  "+food
+                Log.d("returnfoods", "returnFoods: " + food.getTitle() + "  " + food.getContent() + "  " +
+                        food
                         .getImgUrl());
             }
             mFoodAdapter.setNewData(foodList);

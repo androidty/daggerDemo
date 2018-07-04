@@ -2,10 +2,11 @@ package com.ty.dagger.daggerdemo.mvp.di.component;
 
 import com.ty.dagger.daggerdemo.mvp.di.PerActivity;
 import com.ty.dagger.daggerdemo.mvp.di.module.ActivityModule;
+import com.ty.dagger.daggerdemo.mvp.ui.activity.fooddetail.FoodDetailActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.gank.GankActivity;
 import com.ty.dagger.daggerdemo.mvp.ui.activity.photo.PhotoActivity;
-import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeFragment;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.food.FoodFragment;
+import com.ty.dagger.daggerdemo.mvp.ui.fragment.home.HomeFragment;
 import com.ty.dagger.daggerdemo.mvp.ui.fragment.other.OtherFragment;
 
 import dagger.Component;
@@ -26,5 +27,6 @@ public interface ActivityComponent {
 
     void inject(FoodFragment foodFragment);
 
+    void inject(FoodDetailActivity foodDetailActivity);
 
 }

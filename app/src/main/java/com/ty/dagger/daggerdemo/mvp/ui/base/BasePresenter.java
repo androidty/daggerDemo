@@ -1,5 +1,7 @@
 package com.ty.dagger.daggerdemo.mvp.ui.base;
 
+import android.util.Log;
+
 import com.ty.dagger.daggerdemo.mvp.api.ApiService;
 import com.ty.dagger.daggerdemo.mvp.api.config.Constants;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseRequest;
@@ -163,7 +165,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d("HttpOnError", "onError: "+e);
                     }
 
                     @Override

@@ -1,4 +1,4 @@
-package com.ty.dagger.daggerdemo.dagger;
+package com.ty.dagger.daggerdemo.mvp.ui.customview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -17,6 +17,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.ty.dagger.daggerdemo.R;
 
+
 /**
  * Created by ty on 2017/12/9.
  */
@@ -27,12 +28,12 @@ public class PendulumView extends View {
     private float ballRadius;
     //画球的画笔
     private Paint ballPaint;
-    private int ballColor;
     //画线的画笔
     private Paint linePaint;
-    private int lineColor;
 
+    //小球数量
     private int totalNums;
+    //小球数量是否是偶数
     private boolean isEvenNo;
     private int minNo, maxNo;
 
@@ -46,6 +47,7 @@ public class PendulumView extends View {
     private boolean flag;
     private float amplitude;
     private float mRadians;
+    //初始角度是90度
     private float initialRadians = (float) (Math.PI / 2);
 
 
@@ -66,12 +68,14 @@ public class PendulumView extends View {
     private void init(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PendulumView);
         totalNums = typedArray.getInteger(R.styleable.PendulumView_totalNum, 5);
-        ballColor = typedArray.getColor(R.styleable.PendulumView_ballColor, Color.BLACK);
-        lineColor = typedArray.getColor(R.styleable.PendulumView_lineColor, Color.BLACK);
+        if (totalNums < 3) {
+            totalNums = 5;
+        }
+        int ballColor = typedArray.getColor(R.styleable.PendulumView_ballColor, Color.BLACK);
+        int lineColor = typedArray.getColor(R.styleable.PendulumView_lineColor, Color.BLACK);
         ballRadius = typedArray.getFloat(R.styleable.PendulumView_ballRadius, 22f);
         amplitude = typedArray.getFloat(R.styleable.PendulumView_amplitude, 45);
         typedArray.recycle();
-
         setMinMaxNo();
 
         ballPaint = new Paint();
@@ -91,9 +95,8 @@ public class PendulumView extends View {
 
     private void setMinMaxNo() {
         if (totalNums % 2 == 0) {
-            //todo
             isEvenNo = true;
-            maxNo = totalNums / 2 - 1;
+            maxNo = totalNums / 2;
             minNo = -totalNums / 2;
         } else {
             isEvenNo = false;
@@ -103,25 +106,41 @@ public class PendulumView extends View {
     }
 
     /**
+     * 摆动角度越来越小
+     */
+    private void radiansGradient() {
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat((float) (amplitude / 180 * Math.PI), 0);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mRadians = (float) valueAnimator.getAnimatedValue();
+            }
+        });
+        valueAnimator.setDuration(1000 * 60 * 10);
+        valueAnimator.start();
+    }
+
+
+    /**
      * 第一个小球摆动的动画
      */
     private void firstBallAnim() {
+        if (mRadians == 0) {
+            return;
+        }
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(initialRadians, initialRadians + mRadians);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float radian = (float) valueAnimator.getAnimatedValue();
-
                 firstBallX = (float) (lineLength * Math.cos(radian)) + dotX;
                 firstBallY = (float) (lineLength * Math.sin(radian)) + dotY;
-
             }
         });
 
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setDuration(time);
         animatorSet.setInterpolator(new DecelerateInterpolator());
-//        valueAnimator.start();
         valueAnimator.setRepeatCount(1);
         valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
         animatorSet.play(valueAnimator);
@@ -173,11 +192,15 @@ public class PendulumView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        Log.d("firstX", "onSizeChanged: ");
         dotX = w / 2;
         dotY = h / 3;
         lineLength = h / 3;
 //        ballRadius = 22f;
+        //默认第一个球开始动
         firstBallAnim();
+        //角度越来越小
+        radiansGradient();
 
 //        lastBallAnim();
     }
@@ -189,31 +212,61 @@ public class PendulumView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);
-//        canvas.drawCircle(dotX,dotY,ballRadius,ballPaint);
-//        canvas.drawCircle(dotX, 2 * dotY, ballRadius, ballPaint);
-//        canvas.drawLine(dotX, dotY, dotX, 2 * dotY, ballPaint);
-//        canvas.drawCircle(dotX - 2 * ballRadius, 2 * dotY, ballRadius, ballPaint);
-//        canvas.drawLine(dotX - 2 * ballRadius, dotY, dotX - 2 * ballRadius, 2 * dotY, ballPaint);
-//        canvas.drawCircle(dotX + 2 * ballRadius, 2 * dotY, ballRadius, ballPaint);
-//        canvas.drawLine(dotX + 2 * ballRadius, dotY, dotX + 2 * ballRadius, 2 * dotY, ballPaint);
-        if (isEvenNo) {
-            //TODO
-        } else {
-            for (int i = minNo; i <= maxNo; i++) {
+        if(isEvenNo){
+            canvas.drawLine(dotX+(2*minNo+1)*ballRadius,dotY,dotX+(2*maxNo-1)*ballRadius,dotY,linePaint);
+        }else{
+            canvas.drawLine(dotX + minNo * 2 * ballRadius, dotY,dotX + maxNo * 2 * ballRadius, dotY,linePaint);
+        }
+
+        for (int i = minNo; i <= maxNo; i++) {
+            if (isEvenNo) {
+                if (i == 0) continue;
                 if (i == minNo && !flag) {
-                    canvas.drawLine(dotX + i * 2 * ballRadius, dotY, firstBallX + i * 2 * ballRadius, firstBallY,
+                    canvas.drawLine(dotX + (2 * i + 1) * ballRadius, dotY, firstBallX + (2 * i + 1)
+                            * ballRadius, firstBallY, linePaint);
+                    canvas.drawCircle(firstBallX + (2 * i + 1)
+                            * ballRadius, firstBallY, ballRadius, ballPaint);
+                } else if (i == maxNo && flag) {
+                    canvas.drawLine(dotX + (2 * i - 1) * ballRadius, dotY, lastBallX + (2 * i - 1) *
+                                    ballRadius,
+                            lastBallY, linePaint);
+                    canvas.drawCircle(lastBallX + (2 * i - 1) * ballRadius, lastBallY, ballRadius,
+                            ballPaint);
+                } else {
+                    if (i < 0) {//(2i-1)r
+                        canvas.drawLine(dotX + (2 * i + 1) * ballRadius, dotY, dotX + (2 * i + 1) *
+                                        ballRadius, 2 * dotY,
+                                linePaint);
+                        canvas.drawCircle(dotX + (2 * i + 1) * ballRadius, 2 * dotY, ballRadius, ballPaint);
+
+                    } else {//(2i-1)r
+                        canvas.drawLine(dotX + (2 * i - 1) * ballRadius, dotY, dotX + (2 * i - 1) *
+                                ballRadius, 2 * dotY, linePaint);
+                        canvas.drawCircle(dotX + (2 * i - 1) * ballRadius, 2 * dotY, ballRadius, ballPaint);
+                    }
+                }
+                if (i > 0) {
+                    canvas.drawCircle(dotX + (2 * i - 1) * ballRadius, dotY, ballRadius / 2, linePaint);
+                } else {
+                    canvas.drawCircle(dotX + (2 * i + 1) * ballRadius, dotY, ballRadius / 2, linePaint);
+                }
+            } else {
+                if (i == minNo && !flag) {
+                    canvas.drawLine(dotX + i * 2 * ballRadius, dotY, firstBallX + i * 2 * ballRadius,
+                            firstBallY,
                             linePaint);
                     canvas.drawCircle(firstBallX + i * 2 * ballRadius, firstBallY, ballRadius, ballPaint);
                 } else if (i == maxNo && flag) {
-                    canvas.drawLine(dotX + i * 2 * ballRadius, dotY, lastBallX + i * 2 * ballRadius, lastBallY,
+                    canvas.drawLine(dotX + i * 2 * ballRadius, dotY, lastBallX + i * 2 * ballRadius,
+                            lastBallY,
                             linePaint);
                     canvas.drawCircle(lastBallX + i * 2 * ballRadius, lastBallY, ballRadius, ballPaint);
                 } else {
-                    canvas.drawLine(dotX + i * 2 * ballRadius, dotY, dotX + i * 2 * ballRadius, 2 * dotY, linePaint);
+                    canvas.drawLine(dotX + i * 2 * ballRadius, dotY, dotX + i * 2 * ballRadius, 2 * dotY,
+                            linePaint);
                     canvas.drawCircle(dotX + i * 2 * ballRadius, 2 * dotY, ballRadius, ballPaint);
                 }
-
+                canvas.drawCircle(dotX + i * 2 * ballRadius, dotY, ballRadius / 2, linePaint);
             }
         }
         invalidate();
