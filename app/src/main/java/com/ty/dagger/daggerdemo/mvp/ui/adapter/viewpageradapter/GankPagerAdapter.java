@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public class GankPagerAdapter extends FragmentStatePagerAdapter{
-    String[] tabs = {"首页","Android","IOS","其他"};
+    String[] tabs = {"首页","安卓","美食","其他"};
     private List<Fragment> mFragments = new ArrayList<>();
     public GankPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);

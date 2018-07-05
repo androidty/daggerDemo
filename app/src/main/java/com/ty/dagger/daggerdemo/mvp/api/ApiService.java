@@ -2,6 +2,8 @@ package com.ty.dagger.daggerdemo.mvp.api;
 
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.BaseData;
 import com.ty.dagger.daggerdemo.mvp.data.remote.gank.GankData;
+import com.ty.dagger.daggerdemo.mvp.entity.Food;
+import com.ty.dagger.daggerdemo.mvp.entity.FoodDetail;
 import com.ty.dagger.daggerdemo.mvp.entity.Img;
 import com.ty.dagger.daggerdemo.mvp.entity.ImgList;
 import com.ty.dagger.daggerdemo.mvp.wallet.gate.entity.GateBalance;
@@ -68,11 +70,24 @@ public interface ApiService<T> {
     Observable<BaseData<List<Img>>> getImgsByNum(@Field("num") int num);
 
 
+
+
+    @Headers("baseurl:img")
+    @GET("demodev/foods/findFoodTop10")
+    Observable<BaseData<List<Food>>> getFoods();
+
+    @Headers("baseurl:img")
+    @POST("demodev/foods/findFoodDetailById")
+    Observable<BaseData<FoodDetail>> getFoodDetailById(@Query("id") int id);
+
+
     @Headers("baseurl:huobi")
     @GET
     Observable<HuoBiAccount> getHuoBiAccount(@Url String url);
 
     @POST
     Observable<GateBalance> getGateBalance(@HeaderMap Map<String,String> headers,@Url String url);
+
+
 
 }

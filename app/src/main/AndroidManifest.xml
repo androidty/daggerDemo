@@ -31,6 +31,7 @@
             android:theme="@style/Anim_fade"></activity>
         <activity android:name=".mvp.ui.activity.x5webview.X5WebViewActivity"></activity>
         <activity android:name=".PieChatActivity"></activity>
+        <activity android:name=".mvp.ui.activity.fooddetail.FoodDetailActivity"></activity>
     </application>
 
 </manifest>

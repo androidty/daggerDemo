@@ -60,14 +60,11 @@ public class OtherFragment extends BaseFragment implements OtherContract.View, B
         mOtherRv.setAdapter(mOtherAdapter);
         mOtherAdapter.setOnLoadMoreListener(this, mOtherRv);
         mOtherAdapter.disableLoadMoreIfNotFullPage();
-
         mOtherRv.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 openPhotoActivity(position);
             }
-
-
         });
     }
 
