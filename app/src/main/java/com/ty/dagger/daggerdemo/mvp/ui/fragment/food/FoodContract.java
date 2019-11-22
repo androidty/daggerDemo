@@ -10,7 +10,7 @@ import java.util.List;
  * Created by ty on 2018/6/28.
  */
 
-public class FoodContract {
+public interface FoodContract {
     interface View extends MvpView{
         void returnFoods(List<Food> foodList);
     }

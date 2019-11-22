@@ -12,15 +12,15 @@ import java.util.List;
  * Created by ty on 2018/2/6.
  */
 
-public class HomeContract {
-    public interface View extends MvpView {
+public interface HomeContract {
+     interface View extends MvpView {
         void returnAllData(BaseData<List<GankData>> gankLastDatas);
 
         void returnMoreData(BaseData<List<GankData>> gankLastDatas);
         void returnImg(BaseData<List<Img>> imgs);
     }
 
-    public interface Presenter<V extends HomeContract.View> extends MvpPresenter<V> {
+     interface Presenter<V extends HomeContract.View> extends MvpPresenter<V> {
         void requestAllData();
 
         void getMoreData(int page);
